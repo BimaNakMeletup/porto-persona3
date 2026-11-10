@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portofolio Bima Ganteng</title>
+  <meta name="theme-color" content="#001233" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <!-- Canvas Efek Glass-Shatter / Click Ripple -->
+  <canvas id="click-canvas" class="click-canvas" aria-hidden="true"></canvas>
+
+  <!-- P3R Toast Notification Popup (Saat klik copy email / link) -->
+  <div id="p3r-toast" class="p3r-toast" aria-live="polite">
+    <span class="toast-tag">S.E.E.S. // TRANSMISSION</span>
+    <span id="toast-text" class="toast-text"></span>
+  </div>
+
+  <!-- =========================================================================
+       LOADING SCREEN (cepat & instan)
+       ========================================================================= -->
+  <div id="loading-screen" class="loading-screen" role="progressbar" aria-valuemin="0" aria-valuemax="100"
+    aria-valuenow="0">
+    <div class="loading-hint">KLIK DI MANA SAJA UNTUK MEMULAI (BGM READY)</div>
+    <div class="loading-hud">
+      <h2 class="loading-title">NOW LOADING<span class="loading-dots"><span>.</span><span>.</span><span>.</span></span>
+      </h2>
+      <div class="loading-bar-row">
+        <div class="loading-track">
+          <div id="loading-fill" class="loading-fill"></div>
+        </div>
+        <div id="loading-percent" class="loading-percent">0%</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Audio Background Music & Sound Effects -->
+  <audio id="bgm-player" src="sfx/bgm.mp3" loop preload="auto"></audio>
+  <audio id="sfx-menu-utama-el" src="sfx/menu-utama.mp3" preload="auto"></audio>
+  <audio id="sfx-navigation-el" src="sfx/navigation.wav" preload="auto"></audio>
+  <audio id="sfx-close-menu-el" src="sfx/close-menu.mp3" preload="auto"></audio>
+
+  <!-- =========================================================================
+       HOMEPAGE / PAUSE MENU UTAMA (100% BEBAS VIDEO — DENGAN ANIMASI AIR & SWAY ORGANIK)
+       ========================================================================= -->
+  <main id="main-menu" class="main-menu">
+    <!-- Water Stage: Makoto Submerged + Volumetric Sunbeams + Dual Caustics + Physics Canvas -->
+    <div class="homepage-water-stage" id="homepage-water-stage">
+      <!-- Makoto Submerged dengan Anchor Top-Left Sway Alami -->
+      <div class="makoto-submerged-layer" id="makoto-submerged-layer" aria-hidden="true"></div>
+      <!-- Berkas Cahaya Matahari Menembus Air -->
+      <div class="caustic-sunbeams" aria-hidden="true"></div>
+      <!-- Riak Cahaya Caustics Menari di Permukaan & Tubuh Karakter -->
+      <div class="caustic-shimmer-1" aria-hidden="true"></div>
+      <div class="caustic-shimmer-2" aria-hidden="true"></div>
+      <!-- Gelembung Air Bergelombang Sinusoidal & Pecahan Kristal P3R -->
+      <canvas id="water-canvas" class="water-canvas" aria-hidden="true"></canvas>
+    </div>
+
+    <!-- Atmospheric Side Vignette -->
+    <div class="vignette" aria-hidden="true"></div>
+
+
+    <!-- Watermark 01 MAIN di pita miring kiri persis Foto 2 -->
+    <div class="side-watermark-main" aria-hidden="true">
+      <span>01 MAIN</span>
+    </div>
+
+    <!-- Angka watermark samping dinamis (01, 02, 03, 04) -->
+    <div id="side-number" class="side-number" aria-hidden="true">01</div>
+
+    <!-- Header Nama di Kanan Atas -->
+    <div id="menu-profile" class="menu-profile" aria-hidden="true">
+      <div class="menu-profile-name" data-profile-name>BIMA</div>
+      <div class="menu-profile-line"></div>
+    </div>
+
+    <!-- Menu Kolom Opsi (PROJECT, SKILLS, ABOUT, CONTACT) dengan full mouse-hover support -->
+    <nav id="menu-column" class="menu-column" aria-label="Menu Utama">
+      <div id="options-list" class="options-list"></div>
+    </nav>
+
+    <!-- HUD Tombol & BGM Equalizer di Kanan Bawah -->
+    <div class="hud-controls">
+      <div class="buttons-row">
+        <!-- Tombol kontrol lagu / BGM -->
+        <button id="btn-bgm-toggle" class="control-item hud-btn-bgm active" type="button" aria-label="Toggle BGM"
+          title="Toggle Lagu / Musik (Shortcut: B)">
+          <div class="bgm-eq" aria-hidden="true">
+            <span class="eq-bar"></span>
+            <span class="eq-bar"></span>
+            <span class="eq-bar"></span>
+          </div>
+          <span id="bgm-status-text" class="control-text">BGM: COLOR YOUR NIGHT</span>
+        </button>
+
+        <div class="control-item">
+          <span class="control-key">ENTER</span>
+          <span class="control-text">Confirm</span>
+        </div>
+        <div class="control-item">
+          <span class="control-key">ESC</span>
+          <span class="control-text">Close</span>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- =========================================================================
+       HALAMAN PROJECT (SOCIAL LINK STYLE — MENGGUNAKAN VIDEO BACKGROUND)
+       ========================================================================= -->
+  <section id="page-project" class="sub-page page-project" aria-hidden="true" aria-label="Project">
+    <div class="sub-video-container" aria-hidden="true">
+      <video id="project-bg-video" class="sub-bg-video" src="assets/skills-bg.mp4" loop muted playsinline
+        preload="auto"></video>
+      <div class="sub-video-overlay"></div>
+    </div>
+
+    <div class="page-viewport">
+      <div class="page-left">
+        <div class="page-profile-name" data-profile-name>BIMA</div>
+        <div class="geo-header">
+          <div class="geo-back-band" aria-hidden="true"></div>
+          <div class="geo-main-band" aria-hidden="true"></div>
+          <h1 class="geo-title">PROJECT</h1>
+        </div>
+        <div id="slink-cards" class="slink-cards" role="tablist" aria-label="Daftar project"></div>
+      </div>
+
+      <div class="page-hud">
+        <button class="control-item hud-btn" data-action="confirm-project"><span class="control-key">ENTER</span><span
+            class="control-text">Confirm</span></button>
+        <button class="control-item hud-btn" data-action="close"><span class="control-key">ESC</span><span
+            class="control-text">Back</span></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       HALAMAN SKILLS (STATS & ABILITIES — MENGGUNAKAN VIDEO BACKGROUND)
+       ========================================================================= -->
+  <section id="page-skills" class="sub-page page-skills" aria-hidden="true" aria-label="Skills">
+    <div class="sub-video-container" aria-hidden="true">
+      <video id="skills-bg-video" class="sub-bg-video" src="assets/makoto-wallpaper.mp4" loop muted playsinline
+        preload="auto"></video>
+      <div class="sub-video-overlay"></div>
+    </div>
+
+    <div class="page-viewport">
+      <div class="page-left page-left-wide">
+        <div class="page-profile-name" data-profile-name>BIMA</div>
+        <div class="geo-header">
+          <div class="geo-back-band" aria-hidden="true"></div>
+          <div class="geo-main-band" aria-hidden="true"></div>
+          <h1 class="geo-title">SKILLS</h1>
+        </div>
+        <div id="skill-tabs" class="skill-tabs" role="tablist" aria-label="Kategori skill"></div>
+        <div id="skill-list" class="skill-list"></div>
+      </div>
+
+      <div class="page-hud">
+        <button class="control-item hud-btn" data-action="prev-tab">
+          <span class="control-key"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="19" y1="12" x2="5" y2="12" />
+              <polyline points="12 19 5 12 12 5" />
+            </svg></span>
+          <span class="control-text">Prev</span>
+        </button>
+        <button class="control-item hud-btn" data-action="next-tab">
+          <span class="control-key"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12" />
+              <polyline points="12 5 19 12 12 19" />
+            </svg></span>
+          <span class="control-text">Next</span>
+        </button>
+        <button class="control-item hud-btn" data-action="close"><span class="control-key">ESC</span><span
+            class="control-text">Close</span></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       HALAMAN ABOUT
+       ========================================================================= -->
+  <section id="page-about" class="sub-page page-about" aria-hidden="true" aria-label="About">
+    <div class="sub-video-container" aria-hidden="true">
+      <video id="about-bg-video" class="sub-bg-video" src="assets/about-bg.mp4" loop muted playsinline
+        preload="auto"></video>
+      <div class="sub-video-overlay"></div>
+    </div>
+
+    <div class="page-viewport">
+      <div class="page-left">
+        <div class="page-profile-name" data-profile-name>BIMA</div>
+        <div class="geo-header">
+          <div class="geo-back-band" aria-hidden="true"></div>
+          <div class="geo-main-band" aria-hidden="true"></div>
+          <h1 class="geo-title">ABOUT</h1>
+        </div>
+
+        <article class="about-card">
+          <div class="about-top">
+            <div class="about-photo">
+              <img src="assets/profile.jpeg" alt="Bima — Developer Profile" onerror="this.src='assets/favicon.png'" />
+            </div>
+
+            <div class="about-identity">
+              <h2 class="about-name" data-profile-name>ADNAN BIMA</h2>
+              <div class="about-role">Backend Engineer &bull; System Architect</div>
+            </div>
+          </div>
+
+          <div class="about-bio">
+            <p>Full-stack developer focused on backend development and building reliable web applications.
+              Experienced in developing REST APIs, real-time applications using WebSockets, and integrating automated
+              workflows.
+            </p>
+            <p>I enjoy writing clean, maintainable code and building systems that solve real problems. My main
+              technologies include
+              <strong>Laravel (PHP)</strong>, <strong>FastAPI (Python)</strong>, and <strong>Hono (TypeScript)</strong>.
+            </p>
+          </div>
+
+          <div class="about-stats-grid">
+            <div class="stat-badge">
+              <span class="badge-num">15<sup>+</sup></span>
+              <span class="badge-lbl">PROJECTS</span>
+            </div>
+            <div class="stat-badge">
+              <span class="badge-num">100<sup>%</sup></span>
+              <span class="badge-lbl">INTEGRITY</span>
+            </div>
+            <div class="stat-badge">
+              <span class="badge-num">3<sup>+</sup></span>
+              <span class="badge-lbl">YEARS EXP</span>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <div class="page-hud">
+        <button class="control-item hud-btn" data-action="close"><span class="control-key">ESC</span><span
+            class="control-text">Close</span></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       HALAMAN CONTACT (PHONE MAIL UI — MENGGUNAKAN VIDEO BACKGROUND)
+       ========================================================================= -->
+  <section id="page-contact" class="sub-page page-contact" aria-hidden="true" aria-label="Contact">
+    <div class="sub-video-container" aria-hidden="true">
+      <video id="contact-bg-video" class="sub-bg-video" src="assets/contact-bg.mp4" loop muted playsinline
+        preload="auto"></video>
+      <div class="sub-video-overlay contact-overlay"></div>
+    </div>
+
+    <div class="page-viewport contact-viewport">
+      <div class="mail-phone">
+        <svg class="mail-chassis" viewBox="0 0 880 860" preserveAspectRatio="none" aria-hidden="true">
+          <polygon points="10,28 875,56 875,836 10,858" fill="#070a12" />
+          <polygon points="22,50 832,96 828,806 18,838" fill="none" stroke="#ffffff" stroke-width="4.5"
+            stroke-linejoin="round" />
+        </svg>
+
+        <div class="mail-inner">
+          <div class="mail-watermark" aria-hidden="true">MAIL</div>
+
+          <div class="mail-list" role="list">
+            <!-- Email -->
+            <a href="mailto:adnan.43323203@mhs.polines.ac.id" class="mail-row" role="listitem"
+              data-copy="adnan.43323203@mhs.polines.ac.id">
+              <span class="mail-icon icon-gmail" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="34" height="34" fill="currentColor">
+                  <path
+                    d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z" />
+                </svg>
+              </span>
+              <span class="mail-content">
+                <span class="mail-sender">Email Transmission (Klik untuk salin)</span>
+                <span class="mail-line" aria-hidden="true"></span>
+                <span class="mail-text">adnan.43323203@mhs.polines.ac.id</span>
+              </span>
+            </a>
+
+            <!-- GitHub -->
+            <a href="https://github.com/BimaNakMeletup" target="_blank" rel="noopener noreferrer" class="mail-row"
+              role="listitem" data-copy="https://github.com/BimaNakMeletup">
+              <span class="mail-icon icon-github" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="34" height="34" fill="currentColor">
+                  <path
+                    d="M12 .5a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2.1c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.7 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .5z" />
+                </svg>
+              </span>
+              <span class="mail-content">
+                <span class="mail-sender">GitHub Repositories</span>
+                <span class="mail-line" aria-hidden="true"></span>
+                <span class="mail-text">github.com/BimaNakMeletup</span>
+              </span>
+            </a>
+
+            <!-- Instagram -->
+            <a href="https://instagram.com/bima_sukaturu" target="_blank" rel="noopener noreferrer" class="mail-row"
+              role="listitem" data-copy="@bima_sukaturu">
+              <span class="mail-icon icon-instagram" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2.2">
+                  <rect x="3" y="3" width="18" height="18" rx="5" />
+                  <circle cx="12" cy="12" r="4.2" />
+                  <circle cx="17.4" cy="6.6" r="1" fill="currentColor" stroke="none" />
+                </svg>
+              </span>
+              <span class="mail-content">
+                <span class="mail-sender">Instagram Direct</span>
+                <span class="mail-line" aria-hidden="true"></span>
+                <span class="mail-text">@bima_sukaturu</span>
+              </span>
+            </a>
+
+            <!-- Base Location -->
+            <div class="mail-row" role="listitem">
+              <span class="mail-icon icon-linkedin" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="32" height="32" fill="currentColor">
+                  <path
+                    d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+                </svg>
+              </span>
+              <span class="mail-content">
+                <span class="mail-sender">Base Location</span>
+                <span class="mail-line" aria-hidden="true"></span>
+                <span class="mail-text">Semarang, Indonesia (WIB)</span>
+              </span>
+            </div>
+
+            <!-- Operating Hours -->
+            <div class="mail-row mail-row-empty" aria-hidden="true">
+              <span class="mail-icon"></span>
+              <span class="mail-content">
+                <span class="mail-sender">Operating Hours</span>
+                <span class="mail-line"></span>
+                <span class="mail-text">Mon - Fri, 9AM - 6PM WIB</span>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="page-hud page-hud-left">
+        <button class="control-item hud-btn" data-action="close"><span class="control-key">ESC</span><span
+            class="control-text">Close</span></button>
+      </div>
+    </div>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+
+</html>

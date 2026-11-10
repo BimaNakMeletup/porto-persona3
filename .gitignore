@@ -1,0 +1,21 @@
+# File arsip mentah (tidak dipakai di web)
+*.rar
+*.zip
+assets.rar
+sfx.rar
+
+# Video & gambar frame di folder assets yang tidak dipakai di kode
+assets/bg-intro.mp4
+assets/bg-loop.mp4
+assets/bg-about-frame.webp
+assets/bg-contact-frame.webp
+assets/bg-project-frame.webp
+assets/bg-skills-frame.webp
+
+# Konfigurasi lokal editor / AI / OS
+.omp/
+.vscode/
+.idea/
+.vercel/
+.DS_Store
+Thumbs.db
