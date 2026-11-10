@@ -226,15 +226,19 @@ if (btnBgmToggle) {
   btnBgmToggle.addEventListener("click", toggleBgm);
 }
 
-// User first interaction only unlocks audio if NOT user-disabled (hanya berjalan 1 kali)
+// User first interaction unlocks audio once experience has started
 function unlockOnFirstTouch() {
-  if (!userBgmDisabled && isStarted && !isBgmPlaying) {
+  if (!isStarted) return;
+  if (!userBgmDisabled && !isBgmPlaying) {
     startBgm();
   }
+  ["click", "keydown", "touchstart"].forEach((evt) => {
+    window.removeEventListener(evt, unlockOnFirstTouch);
+  });
 }
 
 ["click", "keydown", "touchstart"].forEach((evt) => {
-  window.addEventListener(evt, unlockOnFirstTouch, { once: true, passive: true });
+  window.addEventListener(evt, unlockOnFirstTouch, { passive: true });
 });
 
 /* Homepage: Bebas video — Sub-halaman (Project, Skills, About, Contact) tetap menggunakan video background */
@@ -751,38 +755,120 @@ function applyProfileName() {
 }
 
 /* ============================================================================
-   10. LOADING SCREEN SEQUENCE
+   10. LOADING SCREEN SEQUENCE (REAL ASSET PRELOADER)
    ============================================================================ */
+let isAssetsLoaded = false;
+
+function preloadImage(src) {
+  return new Promise((resolve) => {
+    const img = new Image();
+    img.onload = () => resolve();
+    img.onerror = () => resolve();
+    img.src = src;
+  });
+}
+
+function preloadMediaElement(el, timeoutMs = 8000) {
+  return new Promise((resolve) => {
+    if (!el || el.readyState >= 3) {
+      resolve();
+      return;
+    }
+    let done = false;
+    const finish = () => {
+      if (done) return;
+      done = true;
+      el.removeEventListener("canplaythrough", finish);
+      el.removeEventListener("loadeddata", finish);
+      el.removeEventListener("error", finish);
+      resolve();
+    };
+    el.addEventListener("canplaythrough", finish, { once: true });
+    el.addEventListener("loadeddata", finish, { once: true });
+    el.addEventListener("error", finish, { once: true });
+    try {
+      el.load();
+    } catch (_) {}
+    setTimeout(finish, timeoutMs);
+  });
+}
+
 function startLoading() {
   const bar = document.getElementById("loading-fill");
   const pct = document.getElementById("loading-percent");
   const screen = document.getElementById("loading-screen");
-  let progress = 0;
+  const hint = document.querySelector(".loading-hint");
 
+  const tasks = [
+    // 1. Font resmi P3R
+    document.fonts ? document.fonts.ready.catch(() => {}) : Promise.resolve(),
+    // 2. Gambar utama Homepage & About
+    preloadImage("assets/bg-makoto-frame.webp"),
+    preloadImage("assets/profile.jpg"),
+    // 3. Audio BGM & SFX
+    preloadMediaElement(document.getElementById("bgm-player"), 6000),
+    preloadMediaElement(document.getElementById("sfx-menu-utama-el"), 4000),
+    preloadMediaElement(document.getElementById("sfx-navigation-el"), 4000),
+    preloadMediaElement(document.getElementById("sfx-close-menu-el"), 4000),
+    // 4. Video Background Sub-Halaman
+    preloadMediaElement(document.getElementById("project-bg-video"), 8000),
+    preloadMediaElement(document.getElementById("skills-bg-video"), 8000),
+    preloadMediaElement(document.getElementById("about-bg-video"), 8000),
+    preloadMediaElement(document.getElementById("contact-bg-video"), 8000),
+  ];
+
+  const total = tasks.length;
+  let loadedCount = 0;
+  let displayedProgress = 0;
+  let targetProgress = 0;
+
+  if (hint) {
+    hint.textContent = `MENGUNDUH ASET... (0/${total})`;
+  }
+
+  tasks.forEach((task) => {
+    Promise.resolve(task).finally(() => {
+      loadedCount++;
+      targetProgress = Math.round((loadedCount / total) * 100);
+      if (hint && loadedCount < total) {
+        hint.textContent = `MENGUNDUH ASET... (${loadedCount}/${total})`;
+      }
+    });
+  });
+
+  // Animasi angka & bar mengejar progress unduhan asli secara mulus
   const interval = setInterval(() => {
-    progress += Math.floor(Math.random() * 12) + 6;
-    if (progress >= 100) {
-      progress = 100;
-      clearInterval(interval);
-      if (bar) bar.style.width = "100%";
-      if (pct) pct.textContent = "100%";
+    if (displayedProgress < targetProgress) {
+      const step = Math.max(1, Math.ceil((targetProgress - displayedProgress) * 0.25));
+      displayedProgress = Math.min(targetProgress, displayedProgress + step);
+      if (bar) bar.style.width = `${displayedProgress}%`;
+      if (pct) pct.textContent = `${displayedProgress}%`;
+      if (screen) screen.setAttribute("aria-valuenow", displayedProgress.toString());
+    }
 
+    if (displayedProgress >= 100 && loadedCount >= total) {
+      clearInterval(interval);
+      isAssetsLoaded = true;
+      if (hint) {
+        hint.textContent = "KLIK DI MANA SAJA UNTUK MEMULAI (BGM READY)";
+      }
       setTimeout(() => {
         enterExperience();
-      }, 250);
-    } else {
-      if (bar) bar.style.width = `${progress}%`;
-      if (pct) pct.textContent = `${progress}%`;
+      }, 280);
     }
-  }, 35);
+  }, 30);
 
   if (screen) {
-    screen.addEventListener("click", enterExperience);
+    screen.addEventListener("click", () => {
+      if (isAssetsLoaded) {
+        enterExperience();
+      }
+    });
   }
 }
 
 function enterExperience() {
-  if (isStarted) return;
+  if (isStarted || !isAssetsLoaded) return;
   isStarted = true;
 
   const screen = document.getElementById("loading-screen");
