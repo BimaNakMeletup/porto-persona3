@@ -70,39 +70,45 @@ const OPTIONS = [
 // Daftar Project Bima (Social Link Style)
 const PROJECTS = [
   {
-    numeral: "I",
-    title: "HANDTRACKING TIKTOK VIRAL",
+    numeral: "XIV",
+    title: "Handtracking TikTok",
     subtitle: "Python • OpenCV • AI Vision",
+    rank: "5",
     url: "https://github.com/BimaNakMeletup/handtracking-tiktok-viral",
   },
   {
-    numeral: "II",
-    title: "WHATSAPP CLONE FASTAPI",
-    subtitle: "Python • FastAPI • WebSockets ",
+    numeral: "XV",
+    title: "WhatsApp Clone FastAPI",
+    subtitle: "Python • FastAPI • WebSockets",
+    rank: "MAX",
     url: "https://github.com/BimaNakMeletup/whatsapp-clone-fastapi",
   },
   {
-    numeral: "III",
-    title: "HONO & TYPESCRIPT EDGE API",
+    numeral: "XVII",
+    title: "Hono & TypeScript API",
     subtitle: "TypeScript • Hono • Bun",
+    rank: "6",
     url: "https://github.com/BimaNakMeletup/bun-hono-drizzle-api",
   },
   {
-    numeral: "IV",
-    title: "PERSONAL DRIVE DASHBOARD",
+    numeral: "XVIII",
+    title: "Personal Drive Dashboard",
     subtitle: "TypeScript • Hono • Bun",
+    rank: "9",
     url: "https://github.com/BimaNakMeletup/personal-drive-dashboard",
   },
   {
-    numeral: "V",
-    title: "FASTAPI URL SHORTENER",
+    numeral: "XIX",
+    title: "FastAPI URL Shortener",
     subtitle: "Python • FastAPI • REST API",
+    rank: "2",
     url: "https://github.com/BimaNakMeletup/fastapi-url-shortener",
   },
   {
-    numeral: "VI",
-    title: "FASTAPI BOOK APP",
+    numeral: "XX",
+    title: "FastAPI Book App",
     subtitle: "Python • FastAPI • SQL",
+    rank: "MAX",
     url: "https://github.com/BimaNakMeletup/fastapi_book_app",
   },
 ];
@@ -662,12 +668,22 @@ function renderProjects() {
     card.setAttribute("role", "tab");
     card.setAttribute("aria-selected", isActive ? "true" : "false");
 
+    const isMax = isActive || proj.rank === "MAX";
+    const rankHtml = isMax
+      ? `<span class="slink-rank-max">MAX</span>`
+      : `<span class="slink-rank-lbl">RANK</span><span class="slink-rank-num">${proj.rank}</span>`;
+
     card.innerHTML = `
-      <div class="card-numeral"><span>${proj.numeral}</span></div>
-      <div class="card-body">
-        <div class="card-title">${proj.title}</div>
-        <div class="card-subtitle">${proj.subtitle}</div>
-        <div class="card-red-accent" aria-hidden="true"></div>
+      <div class="slink-top-tier">
+        <div class="slink-top-left">
+          <div class="slink-tarot-tag"><span>${proj.numeral}</span></div>
+          <div class="slink-title-text">${proj.title}</div>
+        </div>
+        <div class="slink-rank-box">${rankHtml}</div>
+        <div class="slink-red-band" aria-hidden="true"></div>
+      </div>
+      <div class="slink-sub-tier">
+        <div class="slink-sub-text">${proj.subtitle}</div>
       </div>
     `;
 
@@ -692,6 +708,15 @@ function selectProject(idx) {
     const isAct = i === idx;
     c.classList.toggle("active", isAct);
     c.setAttribute("aria-selected", isAct ? "true" : "false");
+    const rankBox = c.querySelector(".slink-rank-box");
+    if (rankBox) {
+      const proj = PROJECTS[i];
+      if (isAct || proj.rank === "MAX") {
+        rankBox.innerHTML = `<span class="slink-rank-max">MAX</span>`;
+      } else {
+        rankBox.innerHTML = `<span class="slink-rank-lbl">RANK</span><span class="slink-rank-num">${proj.rank}</span>`;
+      }
+    }
   });
 }
 

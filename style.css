@@ -1104,14 +1104,14 @@ button {
 }
 
 .slink-card {
-  --card-skew: -22deg;
-  --card-unskew: 22deg;
+  --card-skew: -16deg;
+  --card-unskew: 16deg;
   position: relative;
   display: flex;
-  flex-direction: row;
-  width: clamp(580px, 51.5vw, 760px);
-  height: clamp(70px, 9vh, 84px);
-  margin-left: calc(var(--card-idx, 0) * 0.45vw);
+  flex-direction: column;
+  width: clamp(520px, 48vw, 680px);
+  height: clamp(66px, 8.5vh, 72px);
+  margin-left: calc(var(--card-idx, 0) * 0.35vw);
   background: transparent;
   border: none;
   padding: 0;
@@ -1119,41 +1119,23 @@ button {
   outline: none;
   transform: skewX(var(--card-skew));
   text-align: left;
-  transition: width 0.2s ease, transform 0.2s ease, filter 0.2s ease;
+  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), filter 0.22s ease;
   animation: slinkCardSlideIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+  filter: drop-shadow(0 4px 14px rgba(0, 16, 48, 0.45));
 }
 
-.slink-card:nth-child(1) {
-  animation-delay: 90ms;
-}
-
-.slink-card:nth-child(2) {
-  animation-delay: 140ms;
-}
-
-.slink-card:nth-child(3) {
-  animation-delay: 190ms;
-}
-
-.slink-card:nth-child(4) {
-  animation-delay: 240ms;
-}
-
-.slink-card:nth-child(5) {
-  animation-delay: 290ms;
-}
+.slink-card:nth-child(1) { animation-delay: 90ms; }
+.slink-card:nth-child(2) { animation-delay: 140ms; }
+.slink-card:nth-child(3) { animation-delay: 190ms; }
+.slink-card:nth-child(4) { animation-delay: 240ms; }
+.slink-card:nth-child(5) { animation-delay: 290ms; }
+.slink-card:nth-child(6) { animation-delay: 340ms; }
 
 @keyframes slinkCardSlideIn {
   0% {
     opacity: 0;
-    transform: skewX(var(--card-skew)) translateX(-140px);
+    transform: skewX(var(--card-skew)) translateX(-120px);
   }
-
-  70% {
-    opacity: 1;
-    transform: skewX(var(--card-skew)) translateX(10px);
-  }
-
   100% {
     opacity: 1;
     transform: skewX(var(--card-skew)) translateX(0);
@@ -1162,112 +1144,183 @@ button {
 
 .slink-card:hover:not(.active) {
   transform: skewX(var(--card-skew)) translateX(8px);
-  filter: drop-shadow(0 2px 12px rgba(0, 160, 255, 0.35));
+  filter: drop-shadow(0 4px 18px rgba(0, 190, 255, 0.5));
 }
 
 .slink-card.active {
-  width: clamp(620px, 55.5vw, 810px) !important;
-  transform: skewX(var(--card-skew)) translateX(16px) !important;
+  transform: skewX(var(--card-skew)) translateX(16px);
+  filter: drop-shadow(0 8px 26px rgba(0, 200, 255, 0.55));
   z-index: 10;
-  filter: drop-shadow(0 6px 24px rgba(0, 160, 255, 0.45));
 }
 
-.card-numeral {
-  width: clamp(66px, 5vw, 82px);
-  height: 100%;
+/* Tier 1: Main Top Bar */
+.slink-top-tier {
+  position: relative;
+  height: 60%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px 0 10px;
+  background: #021235;
+  border: 1.5px solid rgba(0, 210, 255, 0.55);
+  border-bottom: none;
+  overflow: hidden;
+  transition: background 0.18s ease;
+}
+
+.slink-card.active .slink-top-tier {
+  background: #ffffff;
+  border: none;
+}
+
+.slink-top-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  overflow: hidden;
+}
+
+/* Tarot Ticket Badge */
+.slink-tarot-tag {
+  position: relative;
+  width: 44px;
+  height: 32px;
+  background: #020c22;
+  border: 1.5px solid #00d4ff;
+  border-radius: 2px;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 78% 90%, 50% 84%, 22% 90%, 0 100%);
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #041630;
-  border-right: 1.5px solid rgba(0, 210, 255, 0.45);
   flex-shrink: 0;
+  transition: all 0.18s ease;
 }
 
-.card-numeral span {
-  font-family: var(--font-rodin);
-  font-size: clamp(1.65rem, 1.9vw, 2.2rem);
-  font-weight: 900;
+.slink-tarot-tag span {
+  font-family: var(--font-rodin, sans-serif);
   font-style: italic;
-  transform: skewX(var(--card-unskew));
+  font-weight: 900;
+  font-size: 1rem;
   color: #ffffff;
+  transform: skewX(var(--card-unskew));
   letter-spacing: -0.02em;
 }
 
-.card-body {
-  position: relative;
-  flex: 1;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 0 2.2rem 0 1.8rem;
-  overflow: hidden;
-  background: linear-gradient(90deg, #00549c 0%, #004282 100%);
-  border-top: 1.5px solid rgba(110, 215, 255, 0.5);
-  border-right: 2.5px solid rgba(0, 210, 255, 0.6);
-  border-bottom: 1px solid rgba(0, 30, 70, 0.5);
-  box-shadow: 0 4px 14px rgba(0, 20, 60, 0.35);
-  transition: background 0.2s ease;
+.slink-card.active .slink-tarot-tag {
+  background: #020610;
+  border-color: #020610;
 }
 
-.slink-card.active .card-body {
-  background: linear-gradient(90deg, #ffffff 0%, #f4f9ff 100%) !important;
-  border: none !important;
-}
-
-.card-title {
-  font-family: var(--font-skip);
-  font-weight: bold;
-  font-style: italic;
-  font-size: clamp(1.4rem, 1.6vw, 1.78rem);
-  line-height: 1.15;
-  letter-spacing: -0.01em;
-  transform: skewX(var(--card-unskew));
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+.slink-card.active .slink-tarot-tag span {
   color: #ffffff;
-  text-shadow: 0 1px 4px rgba(0, 15, 45, 0.6);
 }
 
-.card-subtitle {
-  font-family: var(--font-rodin-medium);
-  font-weight: 600;
+/* Project Title Text */
+.slink-title-text {
+  font-family: var(--font-skip, sans-serif);
   font-style: italic;
-  font-size: clamp(0.9rem, 1vw, 1.12rem);
-  line-height: 1.2;
+  font-weight: 800;
+  font-size: clamp(1.25rem, 1.45vw, 1.45rem);
+  color: #ffffff;
   transform: skewX(var(--card-unskew));
-  letter-spacing: 0.02em;
+  letter-spacing: -0.01em;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  color: #8ee6ff;
-  margin-top: 4px;
+  text-shadow: 0 1px 4px rgba(0, 12, 36, 0.7);
+  transition: color 0.18s ease;
 }
 
-.slink-card.active .card-title {
-  color: #061a35 !important;
-  text-shadow: none !important;
+.slink-card.active .slink-title-text {
+  color: #020814;
+  text-shadow: none;
+  font-size: clamp(1.3rem, 1.55vw, 1.55rem);
 }
 
-.slink-card.active .card-subtitle {
-  color: #244b79 !important;
+/* Right Rank Indicator Box */
+.slink-rank-box {
+  display: flex;
+  align-items: baseline;
+  gap: 5px;
+  transform: skewX(var(--card-unskew));
+  flex-shrink: 0;
 }
 
-.card-red-accent {
+.slink-rank-lbl {
+  font-family: var(--font-new-rodin-ub, sans-serif);
+  font-size: 0.65rem;
+  font-weight: 800;
+  color: #5ce8ff;
+  letter-spacing: 0.08em;
+}
+
+.slink-rank-num {
+  font-family: var(--font-rodin, sans-serif);
+  font-style: italic;
+  font-weight: 900;
+  font-size: 1.6rem;
+  color: #5ce8ff;
+  line-height: 1;
+}
+
+/* MAX Rank Badge (Giant Black Heavy Italic) */
+.slink-rank-max {
+  font-family: var(--font-rodin, sans-serif);
+  font-style: italic;
+  font-weight: 900;
+  font-size: 2.1rem;
+  color: #020814;
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+/* Crimson Red Accent Band on Active */
+.slink-red-band {
   display: none;
   position: absolute;
   right: 0;
   top: 0;
   bottom: 0;
-  width: 28px;
-  background: var(--color-red-deep);
-  clip-path: polygon(42% 0, 100% 0, 100% 100%, 0% 100%);
-  z-index: 5;
+  width: 18px;
+  background: #e60026;
+  clip-path: polygon(38% 0, 100% 0, 100% 100%, 0% 100%);
 }
 
-.slink-card.active .card-red-accent {
+.slink-card.active .slink-red-band {
   display: block;
+}
+
+/* Tier 2: Bottom Sub-Bar */
+.slink-sub-tier {
+  height: 40%;
+  background: #62e5ff;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  overflow: hidden;
+  transition: background 0.18s ease;
+}
+
+.slink-sub-text {
+  font-family: var(--font-new-rodin, sans-serif);
+  font-style: italic;
+  font-weight: 800;
+  font-size: clamp(0.78rem, 0.9vw, 0.88rem);
+  color: #020e24;
+  transform: skewX(var(--card-unskew));
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: color 0.18s ease;
+}
+
+.slink-card.active .slink-sub-tier {
+  background: #020814;
+}
+
+.slink-card.active .slink-sub-text {
+  color: #ffffff;
 }
 
 /* --------------------------------------------------------------------------
@@ -2254,20 +2307,12 @@ a,
   .slink-card {
     --card-skew: -16deg;
     --card-unskew: 16deg;
-    width: min(58vw, 450px);
-    height: 62px;
+    width: min(58vw, 470px);
+    height: 64px;
   }
 
   .slink-card.active {
-    width: min(64vw, 490px) !important;
-  }
-
-  .card-title {
-    font-size: 1.25rem;
-  }
-
-  .card-subtitle {
-    font-size: 0.85rem;
+    width: min(60vw, 490px) !important;
   }
 
   /* Skills */
@@ -2500,42 +2545,63 @@ a,
   }
 
   .slink-card {
-    --card-skew: -6deg;
-    --card-unskew: 6deg;
-    width: 97%;
+    --card-skew: -8deg;
+    --card-unskew: 8deg;
+    width: 100%;
     height: 56px;
     margin-left: 0 !important;
     flex-shrink: 0;
   }
 
   .slink-card.active {
-    width: 100% !important;
-    transform: skewX(var(--card-skew)) translateX(2px) !important;
+    transform: skewX(var(--card-skew)) translateX(4px) !important;
   }
 
-  .card-numeral {
-    width: 44px;
+  .slink-top-tier {
+    height: 35px;
+    padding: 0 8px 0 5px;
   }
 
-  .card-numeral span {
-    font-size: 1.1rem;
+  .slink-top-left {
+    gap: 6px;
   }
 
-  .card-body {
-    padding: 0 1.1rem 0 0.75rem;
+  .slink-tarot-tag {
+    width: 28px;
+    height: 24px;
   }
 
-  .card-title {
+  .slink-tarot-tag span {
+    font-size: 0.76rem;
+  }
+
+  .slink-title-text {
     font-size: 0.88rem;
   }
 
-  .card-subtitle {
-    font-size: 0.68rem;
-    margin-top: 2px;
+  .slink-card.active .slink-title-text {
+    font-size: 0.92rem;
   }
 
-  .card-red-accent {
-    width: 14px;
+  .slink-rank-lbl {
+    font-size: 0.52rem;
+  }
+
+  .slink-rank-num {
+    font-size: 1.15rem;
+  }
+
+  .slink-rank-max {
+    font-size: 1.35rem;
+  }
+
+  .slink-sub-tier {
+    height: 21px;
+    padding: 0 10px;
+  }
+
+  .slink-sub-text {
+    font-size: 0.72rem;
   }
 
   /* Skills Page di HP (Grid Tab 2x2 Rapi + Progress Bar Utuh) */
