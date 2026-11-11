@@ -24,46 +24,50 @@ const OPTIONS = [
   {
     name: "PROJECT",
     target: "page-project",
-    rotation: -20,
-    offsetX: -40,
-    offsetY: 25,
-    fontSize: "5.15rem",
-    bannerScaleX: 1.07,
-    bannerScaleY: 3.35,
-    zIndex: 1,
+    rotation: -10,
+    offsetX: -45,
+    offsetY: 20,
+    fontSize: "5.4rem",
+    bannerScaleX: 1.12,
+    bannerScaleY: 3.4,
+    zIndex: 4,
+    colorClass: "fill-cyan-bright",
   },
   {
     name: "SKILLS",
     target: "page-skills",
-    rotation: -12,
-    offsetX: -65,
-    offsetY: 30,
-    fontSize: "4.55rem",
-    bannerScaleX: 0.96,
-    bannerScaleY: 3.05,
-    zIndex: 2,
+    rotation: 0,
+    offsetX: -45,
+    offsetY: 20,
+    fontSize: "5.25rem",
+    bannerScaleX: 1.04,
+    bannerScaleY: 3.25,
+    zIndex: 3,
+    colorClass: "fill-cyan-light",
   },
   {
     name: "ABOUT",
     target: "page-about",
-    rotation: -4,
-    offsetX: -80,
-    offsetY: 35,
-    fontSize: "4.85rem",
-    bannerScaleX: 1.02,
-    bannerScaleY: 3.25,
-    zIndex: 3,
+    rotation: -10,
+    offsetX: -45,
+    offsetY: 50,
+    fontSize: "5.35rem",
+    bannerScaleX: 1.06,
+    bannerScaleY: 3.3,
+    zIndex: 2,
+    colorClass: "fill-blue-electric",
   },
   {
     name: "CONTACT",
     target: "page-contact",
-    rotation: 5,
-    offsetX: -85,
-    offsetY: 40,
-    fontSize: "4.65rem",
-    bannerScaleX: 1.04,
-    bannerScaleY: 3.2,
-    zIndex: 4,
+    rotation: -5,
+    offsetX: -45,
+    offsetY: 60,
+    fontSize: "4.95rem",
+    bannerScaleX: 1.15,
+    bannerScaleY: 3.25,
+    zIndex: 1,
+    colorClass: "fill-blue-medium",
   },
 ];
 
@@ -303,7 +307,7 @@ function initWaterCanvas() {
   }));
 
   let isWaterRunning = true;
-  window.startWaterLoop = function() {
+  window.startWaterLoop = function () {
     if (!isWaterRunning && !activePage) {
       isWaterRunning = true;
       requestAnimationFrame(draw);
@@ -403,7 +407,7 @@ function renderOptions() {
   cachedOptionItems = [];
 
   OPTIONS.forEach((opt, index) => {
-    const colorClass = colors[(index + 2) % colors.length];
+    const colorClass = opt.colorClass || colors[(index + 2) % colors.length];
     const cleanName = opt.name.replace(/ /g, "");
     const bannerScaleFactorX = opt.bannerScaleX || 1.0;
     const bannerScaleY = opt.bannerScaleY || 3.2;
@@ -422,6 +426,7 @@ function renderOptions() {
         class="option-hitbox"
         data-index="${index}"
         aria-label="${opt.name}"
+        style="transform: translateY(-50%) rotate(${opt.rotation}deg); left: ${opt.offsetX + 40}px;"
         type="button">
       </button>
 
@@ -855,7 +860,7 @@ function preloadMediaElement(el, timeoutMs = 8000) {
     el.addEventListener("error", finish, { once: true });
     try {
       el.load();
-    } catch (_) {}
+    } catch (_) { }
     setTimeout(finish, timeoutMs);
   });
 }
@@ -868,7 +873,7 @@ function startLoading() {
 
   const tasks = [
     // 1. Font resmi P3R
-    document.fonts ? document.fonts.ready.catch(() => {}) : Promise.resolve(),
+    document.fonts ? document.fonts.ready.catch(() => { }) : Promise.resolve(),
     // 2. Gambar utama Homepage & About
     preloadImage("assets/bg-makoto-frame.webp"),
     preloadImage("assets/profile.jpg"),

@@ -608,7 +608,7 @@ button {
 /* Item Options: SVG ignores pointer-events so lower items NEVER block higher ones! */
 .option-item {
   position: relative;
-  margin-top: -7.7rem;
+  margin-top: -8.6rem;
   pointer-events: none !important;
   opacity: 0;
   transform: translateX(110px) skewX(-8deg);
@@ -629,8 +629,8 @@ button {
   left: 0;
   top: 50%;
   transform: translateY(-50%);
-  width: 600px;
-  height: 5.2rem;
+  width: 520px;
+  height: 4.8rem;
   outline: none;
   pointer-events: auto !important;
   cursor: pointer;
@@ -651,26 +651,22 @@ button {
 
 .option-text {
   font-family: var(--font-rodin);
-  font-size: 4.8rem;
+  font-size: 5.4rem;
   font-style: italic;
   font-weight: 900;
-  letter-spacing: -0.14em;
+  letter-spacing: -0.09em;
   transform-origin: 25% center;
   transition: transform 0.12s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .option-text.base-text {
-  /* Cara atur bayangan:
-     - stroke-width: tebal garis luar biru di sekeliling huruf (misal: 6px, 10px, 14px)
-     - stroke-opacity: opasitas garis luar (0.0 transparan s/d 1.0 pekat)
-     - angka terakhir di rgba(R, G, B, OPASITAS): opasitas drop-shadow (0.0 s/d 1.0) */
   paint-order: stroke fill;
-  stroke: #013aa6;
-  stroke-width: 8px;
-  stroke-opacity: 0.5;
+  stroke: #011f68;
+
+  stroke-opacity: 0.8;
   stroke-linejoin: round;
   filter:
-    drop-shadow(6px 6px 0px rgba(1, 43, 122, 0.75)) drop-shadow(0px 4px 14px rgba(1, 45, 130, 0.6));
+    drop-shadow(4px 6px 0px rgba(0, 15, 60, 0.6)) drop-shadow(0px 4px 18px rgba(0, 80, 220, 0.6));
 }
 
 .fill-button-1 {
@@ -695,6 +691,22 @@ button {
 
 .fill-fg {
   fill: var(--color-fg);
+}
+
+.fill-cyan-bright {
+  fill: #3ee5ff !important;
+}
+
+.fill-cyan-light {
+  fill: #7df2ff !important;
+}
+
+.fill-blue-electric {
+  fill: #2284f5 !important;
+}
+
+.fill-blue-medium {
+  fill: #1c6ed9 !important;
 }
 
 .option-item .selector-group,
@@ -723,6 +735,19 @@ button {
   100% {
     transform: scale(1.15);
   }
+}
+
+/* Selected state: Jet Black text on White Banner with Red Slash like SKILL in P3R */
+.option-item.selected .option-text.base-text {
+  fill: #000000 !important;
+  stroke: none !important;
+  filter: none !important;
+}
+
+.option-item.selected .option-text.fill-red {
+  fill: #ff1133 !important;
+  stroke: none !important;
+  filter: none !important;
 }
 
 .pulse-anim {
@@ -919,6 +944,7 @@ button {
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
 }
+
 body:has(.sub-page.active) .homepage-water-stage *,
 body:has(.sub-page.circle-transitioning) .homepage-water-stage * {
   animation-play-state: paused !important;
@@ -934,6 +960,7 @@ body:has(.sub-page.circle-transitioning) .homepage-water-stage * {
   overflow: hidden;
   pointer-events: none;
 }
+
 .sub-bg-frame {
   position: absolute;
   inset: 0;
@@ -1131,18 +1158,36 @@ body:has(.sub-page.circle-transitioning) .homepage-water-stage * {
   filter: drop-shadow(0 4px 14px rgba(0, 16, 48, 0.45));
 }
 
-.slink-card:nth-child(1) { animation-delay: 90ms; }
-.slink-card:nth-child(2) { animation-delay: 140ms; }
-.slink-card:nth-child(3) { animation-delay: 190ms; }
-.slink-card:nth-child(4) { animation-delay: 240ms; }
-.slink-card:nth-child(5) { animation-delay: 290ms; }
-.slink-card:nth-child(6) { animation-delay: 340ms; }
+.slink-card:nth-child(1) {
+  animation-delay: 90ms;
+}
+
+.slink-card:nth-child(2) {
+  animation-delay: 140ms;
+}
+
+.slink-card:nth-child(3) {
+  animation-delay: 190ms;
+}
+
+.slink-card:nth-child(4) {
+  animation-delay: 240ms;
+}
+
+.slink-card:nth-child(5) {
+  animation-delay: 290ms;
+}
+
+.slink-card:nth-child(6) {
+  animation-delay: 340ms;
+}
 
 @keyframes slinkCardSlideIn {
   0% {
     opacity: 0;
     transform: skewX(var(--card-skew)) translateX(-120px);
   }
+
   100% {
     opacity: 1;
     transform: skewX(var(--card-skew)) translateX(0);
@@ -1559,6 +1604,7 @@ body:has(.sub-page.circle-transitioning) .homepage-water-stage * {
     opacity: 0;
     transform: translateX(-50px);
   }
+
   100% {
     opacity: 1;
     transform: translateX(0);
@@ -1870,6 +1916,7 @@ body:has(.sub-page.circle-transitioning) .homepage-water-stage * {
   background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
   color: #ffffff;
 }
+
 .icon-hours {
   background: #00b4d8;
   color: #ffffff;
@@ -2370,6 +2417,7 @@ a,
     width: min(58vw, 460px);
     height: min(80vh, 720px);
   }
+
   .mail-inner {
     padding: 24px 28px;
     overflow-y: auto;
