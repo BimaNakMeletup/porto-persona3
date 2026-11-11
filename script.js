@@ -297,6 +297,11 @@ function initWaterCanvas() {
   }));
 
   function draw() {
+    if (activePage) {
+      requestAnimationFrame(draw);
+      return;
+    }
+
     ctx.clearRect(0, 0, w, h);
 
     // Interpolasi gerakan mouse parallax
@@ -514,8 +519,12 @@ function setMenuIndex(index) {
 }
 
 /* ============================================================================
-   6. WAVY CIRCLE TRANSITION ENGINE (Atlus Ripple Reveal)
+   6. WAVY CIRCLE TRANSITION ENGINE & HTML FRAME BACKGROUNDS
    ============================================================================ */
+function initSubpageVideoCanvases() {
+  // Sub-halaman (Project, Skills, About, Contact) menggunakan HTML background frame murni (100% SVG/CSS)
+}
+
 function generateWavyPolygon(cx, cy, r, numPoints = 72, phase = 0.0) {
   if (r <= 0.5) {
     const pt = `${cx.toFixed(1)}px ${cy.toFixed(1)}px`;
@@ -767,6 +776,31 @@ function preloadImage(src) {
     img.src = src;
   });
 }
+function preloadIframe(el, timeoutMs = 4000) {
+  return new Promise((resolve) => {
+    if (!el) {
+      resolve();
+      return;
+    }
+    try {
+      if (el.contentDocument && el.contentDocument.readyState === "complete") {
+        resolve();
+        return;
+      }
+    } catch (_) {}
+    let done = false;
+    const finish = () => {
+      if (done) return;
+      done = true;
+      el.removeEventListener("load", finish);
+      el.removeEventListener("error", finish);
+      resolve();
+    };
+    el.addEventListener("load", finish, { once: true });
+    el.addEventListener("error", finish, { once: true });
+    setTimeout(finish, timeoutMs);
+  });
+}
 
 function preloadMediaElement(el, timeoutMs = 8000) {
   return new Promise((resolve) => {
@@ -810,13 +844,16 @@ function startLoading() {
     preloadMediaElement(document.getElementById("sfx-menu-utama-el"), 4000),
     preloadMediaElement(document.getElementById("sfx-navigation-el"), 4000),
     preloadMediaElement(document.getElementById("sfx-close-menu-el"), 4000),
-    // 4. Video Background Sub-Halaman
-    preloadMediaElement(document.getElementById("project-bg-video"), 8000),
-    preloadMediaElement(document.getElementById("skills-bg-video"), 8000),
-    preloadMediaElement(document.getElementById("about-bg-video"), 8000),
-    preloadMediaElement(document.getElementById("contact-bg-video"), 8000),
+    // 4. Background Frame & Karakter WebP Sub-Halaman
+    preloadImage("project-char.webp"),
+    preloadImage("skills-char.webp"),
+    preloadImage("about-char.webp"),
+    preloadImage("contact-char.webp"),
+    preloadIframe(document.getElementById("project-bg-frame")),
+    preloadIframe(document.getElementById("skills-bg-frame")),
+    preloadIframe(document.getElementById("about-bg-frame")),
+    preloadIframe(document.getElementById("contact-bg-frame")),
   ];
-
   const total = tasks.length;
   let loadedCount = 0;
   let displayedProgress = 0;
@@ -964,6 +1001,7 @@ document.querySelectorAll("[data-action]").forEach((btn) => {
    ============================================================================ */
 applyProfileName();
 initWaterCanvas();
+initSubpageVideoCanvases();
 renderOptions();
 renderProjects();
 renderSkillTabs();
@@ -989,10 +1027,17 @@ function initClickCanvas() {
 
   const particles = [];
 
+  let isClickLoopRunning = false;
+  function startClickLoop() {
+    if (!isClickLoopRunning) {
+      isClickLoopRunning = true;
+      requestAnimationFrame(drawClicks);
+    }
+  }
+
   window.addEventListener("click", (e) => {
     const x = e.clientX;
     const y = e.clientY;
-
     // Cincin gelombang shockwave
     particles.push({
       type: "ring",
@@ -1019,6 +1064,7 @@ function initClickCanvas() {
         alpha: 0.9,
       });
     }
+    startClickLoop();
   });
 
   function drawClicks() {
@@ -1056,9 +1102,12 @@ function initClickCanvas() {
         ctx.restore();
       }
     }
-    requestAnimationFrame(drawClicks);
+    if (particles.length > 0) {
+      requestAnimationFrame(drawClicks);
+    } else {
+      isClickLoopRunning = false;
+    }
   }
-  drawClicks();
 }
 
 /* P3R Toast Notification System */

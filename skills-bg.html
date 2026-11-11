@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Persona 3 Reload - Skills Background Frame</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: #081622;
+    font-family: "Orbitron", system-ui, -apple-system, sans-serif;
+    color: #fff;
+  }
+
+  /* ===== FULLSCREEN CONTAINER (OPTIMIZED WITH CSS CONTAINMENT) ===== */
+  .p3r-skills {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background: #1bbbee;
+    isolation: isolate;
+    contain: strict;
+  }
+
+  .p3r-skills svg,
+  .p3r-skills__char-wrap {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  /* ===== 1. UNDERWATER SUNBEAMS / GOD RAYS ===== */
+  .p3r-god-rays {
+    transform-origin: 1100px -50px;
+    will-change: transform, opacity;
+    animation: p3r-ray-drift 8s ease-in-out infinite alternate;
+  }
+
+  @keyframes p3r-ray-drift {
+    0% {
+      opacity: 0.35;
+      transform: skewX(0deg);
+    }
+    50% {
+      opacity: 0.65;
+      transform: skewX(-2.5deg);
+    }
+    100% {
+      opacity: 0.42;
+      transform: skewX(-1.2deg);
+    }
+  }
+
+  /* ===== 2. DUAL-LAYER WATER CAUSTICS ===== */
+  .p3r-caustic-layer-1 {
+    will-change: transform, opacity;
+    animation: p3r-caustic-drift-1 7s ease-in-out infinite alternate;
+  }
+
+  @keyframes p3r-caustic-drift-1 {
+    0% {
+      transform: scale3d(1, 1, 1) translate3d(0, 0, 0);
+      opacity: 0.75;
+    }
+    100% {
+      transform: scale3d(1.03, 1.02, 1) translate3d(16px, -14px, 0);
+      opacity: 0.95;
+    }
+  }
+
+  .p3r-caustic-layer-2 {
+    will-change: transform, opacity;
+    animation: p3r-caustic-drift-2 9s ease-in-out infinite alternate;
+  }
+
+  @keyframes p3r-caustic-drift-2 {
+    0% {
+      transform: scale3d(1.02, 1.03, 1) translate3d(12px, 10px, 0);
+      opacity: 0.6;
+    }
+    100% {
+      transform: scale3d(1, 1, 1) translate3d(-15px, -8px, 0);
+      opacity: 0.85;
+    }
+  }
+
+  /* ===== 3. KARAKTER MAKOTO YUKI (FLOATING KE BAWAH & KE KIRI) ===== */
+  .p3r-skills__char-wrap {
+    position: absolute;
+    left: -3%;
+    right: 0;
+    top: 4%;
+    bottom: -4%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 5;
+    will-change: transform;
+    transform-origin: 30% 70%;
+    animation: p3r-drift-down-left 5.4s cubic-bezier(0.42, 0.08, 0.28, 1) infinite alternate;
+  }
+
+  @keyframes p3r-drift-down-left {
+    0% {
+      transform: translate3d(0, 0, 0) rotate(0deg);
+    }
+    100% {
+      /* Mengambang lebih terasa ke arah bawah (+14px) dan ke kiri (-18px) */
+      transform: translate3d(-18px, 14px, 0) rotate(-0.8deg);
+    }
+  }
+  .p3r-skills__char {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: left bottom;
+    pointer-events: none;
+    user-select: none;
+  }
+  /* Responsive Tablet & Mobile (Karakter Utuh Tanpa Terpotong) */
+  @media (max-width: 1024px) {
+    .p3r-skills__char-wrap {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+    .p3r-skills__char {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      height: 70vh;
+      max-height: 720px;
+      width: auto;
+      max-width: none;
+      object-fit: contain;
+      transform: translateX(-24%);
+    }
+  }
+  @media (max-width: 767px) {
+    .p3r-skills__char {
+      bottom: -10px;
+      height: 52vh;
+      max-height: 480px;
+      transform: translateX(-22%);
+      opacity: 0.65;
+    }
+  }
+
+  /* ===== 4. HEADPHONE ACOUSTIC RIPPLES ===== */
+  .p3r-hp-ring {
+    transform-origin: 855px 542px;
+    animation: p3r-sonar-ring 2.4s cubic-bezier(0.1, 0.7, 0.2, 1) infinite;
+  }
+  .p3r-hp-ring:nth-child(2) { animation-delay: 0.4s; }
+  .p3r-hp-ring:nth-child(3) { animation-delay: 0.8s; }
+  .p3r-hp-ring:nth-child(4) { animation-delay: 1.3s; }
+
+  @keyframes p3r-sonar-ring {
+    0% {
+      r: 12px;
+      stroke-width: 3px;
+      stroke: #5ce8ff;
+      opacity: 0.95;
+    }
+    60% {
+      stroke: #00b4d8;
+      opacity: 0.55;
+    }
+    100% {
+      r: 65px;
+      stroke-width: 0.8px;
+      stroke: #007799;
+      opacity: 0;
+    }
+  }
+
+  /* ===== 5. EVOKER BUCKLE METALLIC GLINT ===== */
+  .p3r-buckle-glint {
+    transform-origin: 414px 404px;
+    animation: p3r-glint-flash 4s ease-in-out infinite;
+  }
+
+  @keyframes p3r-glint-flash {
+    0%, 80%, 100% {
+      opacity: 0;
+      transform: scale(0.2) rotate(0deg);
+    }
+    88% {
+      opacity: 1;
+      transform: scale(1.2) rotate(45deg);
+    }
+    94% {
+      opacity: 0.4;
+      transform: scale(0.6) rotate(90deg);
+    }
+  }
+
+  /* ===== 6. MULTICOLOR FLOATING PRISM SHARDS ===== */
+  .p3r-shard {
+    transform-box: fill-box;
+    transform-origin: center center;
+    will-change: transform, opacity;
+    animation: p3r-prism-float 4.5s ease-in-out infinite;
+  }
+
+  @keyframes p3r-prism-float {
+    0%, 100% {
+      transform: translate3d(0, 0, 0) rotate(0deg);
+      opacity: 0.85;
+    }
+    50% {
+      transform: translate3d(var(--tx, 10px), var(--ty, -26px), 0) rotate(var(--rot, 28deg));
+      opacity: 0.3;
+    }
+  }
+
+  /* Shard Colors */
+  .shard-green  { fill: #00e676; }
+  .shard-purple { fill: #b388ff; }
+  .shard-cyan   { fill: #80d8ff; }
+  .shard-white  { fill: #ffffff; }
+  /* ===== 7. RISING WATER BUBBLES / LIGHT MOTES ===== */
+  .p3r-bubble {
+    will-change: transform, opacity;
+    animation: p3r-bubble-rise var(--dur, 6s) linear infinite;
+  }
+
+  @keyframes p3r-bubble-rise {
+    0% {
+      transform: translate3d(0, 0, 0);
+      opacity: 0;
+    }
+    15% {
+      opacity: var(--op, 0.75);
+    }
+    85% {
+      opacity: var(--op, 0.75);
+    }
+    100% {
+      transform: translate3d(var(--drift, 18px), -380px, 0);
+      opacity: 0;
+    }
+  }
+</style>
+</head>
+<body>
+
+<section class="p3r-skills" aria-label="Persona 3 Reload - Skills Background Frame">
+
+  <!-- Layer 1: Background SVG (Gradasi Laut + God Rays + Dual Caustics + Halftone + Shards Belakang) -->
+  <svg class="p3r-skills__back" viewBox="0 0 1280 720" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <defs>
+      <!-- Base Cyan/Turquoise Ocean Gradient -->
+      <linearGradient id="p3r-skills-base" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#22c4f5"/>
+        <stop offset="45%" stop-color="#1bbbee"/>
+        <stop offset="100%" stop-color="#0f92c6"/>
+      </linearGradient>
+
+      <!-- Underwater Sunbeam / God Ray Gradient -->
+      <linearGradient id="p3r-ray-grad" x1="0.8" y1="0" x2="0.2" y2="1">
+        <stop offset="0%" stop-color="#ffffff" stop-opacity="0.45"/>
+        <stop offset="35%" stop-color="#a6f2ff" stop-opacity="0.22"/>
+        <stop offset="100%" stop-color="#1bbbee" stop-opacity="0"/>
+      </linearGradient>
+
+      <!-- Water Caustic Ribbon Gradient 1 -->
+      <linearGradient id="p3r-caustic-grad-1" x1="0" y1="0" x2="0.8" y2="1">
+        <stop offset="0%" stop-color="#72e6ff" stop-opacity="0.38"/>
+        <stop offset="50%" stop-color="#28d0ff" stop-opacity="0.16"/>
+        <stop offset="100%" stop-color="#0d84b8" stop-opacity="0"/>
+      </linearGradient>
+
+      <!-- Water Caustic Ribbon Gradient 2 -->
+      <linearGradient id="p3r-caustic-grad-2" x1="0.2" y1="0" x2="0.9" y2="1">
+        <stop offset="0%" stop-color="#90f0ff" stop-opacity="0.32"/>
+        <stop offset="60%" stop-color="#3de0ff" stop-opacity="0.12"/>
+        <stop offset="100%" stop-color="#077aa8" stop-opacity="0"/>
+      </linearGradient>
+
+      <!-- Soft Glow Blur Filter -->
+      <filter id="p3r-skills-blur" x="-20%" y="-20%" width="140%" height="140%">
+        <feGaussianBlur stdDeviation="6"/>
+      </filter>
+
+      <!-- Tekstur Halftone Grid Pattern -->
+      <pattern id="p3r-skills-dots" width="8" height="8" patternUnits="userSpaceOnUse">
+        <circle cx="4" cy="4" r="1.35" fill="#034862"/>
+      </pattern>
+      <radialGradient id="p3r-skills-mask-grad" cx="0.25" cy="0.65" r="0.75">
+        <stop offset="0%" stop-color="#fff" stop-opacity="0.75"/>
+        <stop offset="60%" stop-color="#fff" stop-opacity="0.35"/>
+        <stop offset="100%" stop-color="#fff" stop-opacity="0"/>
+      </radialGradient>
+      <mask id="p3r-skills-texture-mask">
+        <rect width="1280" height="720" fill="url(#p3r-skills-mask-grad)"/>
+      </mask>
+    </defs>
+
+    <!-- Base Canvas Background -->
+    <rect width="1280" height="720" fill="url(#p3r-skills-base)"/>
+
+    <!-- Underwater Sunbeams (God Rays) -->
+    <g class="p3r-god-rays">
+      <polygon points="1220,-50 1380,-50 980,750 780,750" fill="url(#p3r-ray-grad)"/>
+      <polygon points="1080,-50 1190,-50 680,750 530,750" fill="url(#p3r-ray-grad)"/>
+      <polygon points="920,-50 1000,-50 440,750 340,750" fill="url(#p3r-ray-grad)" opacity="0.7"/>
+      <polygon points="760,-50 820,-50 260,750 180,750" fill="url(#p3r-ray-grad)" opacity="0.45"/>
+    </g>
+
+    <!-- Dual-Layer Water Caustics -->
+    <g class="p3r-caustic-layer-1">
+      <path d="M -80 180 Q 240 80 620 220 T 1360 140 L 1360 480 Q 880 380 440 520 T -80 420 Z"
+            fill="url(#p3r-caustic-grad-1)" filter="url(#p3r-skills-blur)"/>
+    </g>
+    <g class="p3r-caustic-layer-2">
+      <path d="M -60 300 Q 340 220 800 320 T 1360 240 L 1360 620 Q 940 500 500 640 T -60 560 Z"
+            fill="url(#p3r-caustic-grad-2)" filter="url(#p3r-skills-blur)"/>
+    </g>
+
+    <!-- Tekstur Halftone Lembut -->
+    <rect width="1280" height="720" fill="url(#p3r-skills-dots)" mask="url(#p3r-skills-texture-mask)" opacity="0.8"/>
+
+    <!-- Garis Busur Tipis Aksen -->
+    <path d="M 120 740 Q 640 420 1340 580" fill="none" stroke="#004662" stroke-width="2.2" opacity="0.65"/>
+    <path d="M 280 740 Q 740 460 1340 640" fill="none" stroke="#68e5ff" stroke-width="1.6" opacity="0.55"/>
+
+    <!-- Shards Belakang Karakter (Lapisan Kedalaman) -->
+    <g id="p3rBackShards"></g>
+
+    <!-- Gelembung Air / Partikel Cahaya Bawah Air -->
+    <g id="p3rBubbles"></g>
+  </svg>
+
+  <!-- Layer 2: Karakter Makoto Yuki (skills-char.webp dengan PNG Fallback & Floating Halus) -->
+  <div class="p3r-skills__char-wrap">
+    <picture>
+      <source srcset="skills-char.webp" type="image/webp">
+      <img class="p3r-skills__char" src="skills-char.png" alt="Persona 3 Reload Protagonist - Skills" decoding="async" fetchpriority="high">
+    </picture>
+
+    <!-- Headphone Acoustic Soundwave Ripples (Mengikuti gerakan kepala) -->
+    <svg viewBox="0 0 1280 720" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <circle cx="855" cy="542" r="14" fill="none" class="p3r-hp-ring"/>
+      <circle cx="855" cy="542" r="14" fill="none" class="p3r-hp-ring"/>
+      <circle cx="855" cy="542" r="14" fill="none" class="p3r-hp-ring"/>
+      <circle cx="855" cy="542" r="14" fill="none" class="p3r-hp-ring"/>
+    </svg>
+  </div>
+
+  <!-- Layer 3: Foreground Shards Beraneka Warna + Kilatan Gesper Evoker -->
+  <svg class="p3r-skills__front" viewBox="0 0 1280 720" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <!-- Kilatan Refleksi Gesper Evoker (Glint / Lens Flare) -->
+    <g class="p3r-buckle-glint">
+      <polygon points="414,394 417,404 427,404 419,409 422,419 414,413 406,419 409,409 401,404 411,404"
+               fill="#ffffff"/>
+      <circle cx="414" cy="404" r="5" fill="#a4f4ff" opacity="0.9" filter="url(#p3r-skills-blur)"/>
+    </g>
+
+    <!-- Serpihan Kaca Prismatik Depan (Hijau, Ungu, Cyan, Putih) -->
+    <g id="p3rSkillsShards"></g>
+  </svg>
+
+</section>
+
+<script>
+(() => {
+  const NS = "http://www.w3.org/2000/svg";
+  let seed = 88;
+  const rnd = () => ((seed = (seed * 16807) % 2147483647) - 1) / 2147483646;
+  const colorClasses = ["shard-green", "shard-purple", "shard-cyan", "shard-white"];
+
+  // Helper untuk membuat serpihan segitiga
+  const createShards = (container, count, minS, maxS, minOp, maxOp) => {
+    const fragment = document.createDocumentFragment();
+    for (let i = 0; i < count; i++) {
+      const cx = 50 + rnd() * 1180;
+      const cy = 40 + rnd() * 640;
+      const s = minS + rnd() * (maxS - minS);
+      const a = rnd() * Math.PI * 2;
+      const pt = [0, 2.2, 4.2].map(k => (cx + s * Math.cos(a + k)).toFixed(1) + "," + (cy + s * Math.sin(a + k)).toFixed(1));
+
+      const colorClass = colorClasses[Math.floor(rnd() * colorClasses.length)];
+      const poly = document.createElementNS(NS, "polygon");
+      poly.setAttribute("points", pt.join(" "));
+      poly.setAttribute("fill-opacity", (minOp + rnd() * (maxOp - minOp)).toFixed(2));
+      poly.setAttribute("class", `p3r-shard ${colorClass}`);
+
+      poly.style.setProperty("--tx", `${(-14 + rnd() * 32).toFixed(1)}px`);
+      poly.style.setProperty("--ty", `${(-24 - rnd() * 38).toFixed(1)}px`);
+      poly.style.setProperty("--rot", `${(-50 + rnd() * 100).toFixed(1)}deg`);
+      poly.style.animationDelay = `${(rnd() * 4.2).toFixed(2)}s`;
+      poly.style.animationDuration = `${(3.0 + rnd() * 2.8).toFixed(2)}s`;
+
+      fragment.appendChild(poly);
+    }
+    container.appendChild(fragment);
+  };
+
+  // 1. Shards Belakang (35 buah) - lebih kecil & halus
+  const backShards = document.getElementById("p3rBackShards");
+  if (backShards) createShards(backShards, 35, 3, 7, 0.25, 0.55);
+
+  // 2. Shards Depan (40 buah) - lebih besar, tajam & berkilau
+  const frontShards = document.getElementById("p3rSkillsShards");
+  if (frontShards) createShards(frontShards, 40, 5, 14, 0.45, 0.95);
+
+  // 3. Gelembung Air / Partikel Cahaya Bawah Air (30 buah)
+  const bubbleContainer = document.getElementById("p3rBubbles");
+  if (bubbleContainer) {
+    const frag = document.createDocumentFragment();
+    for (let i = 0; i < 30; i++) {
+      const cx = 80 + rnd() * 1120;
+      const cy = 350 + rnd() * 350;
+      const r = 1.5 + rnd() * 3.5;
+      const dur = 4.5 + rnd() * 5.0;
+      const delay = rnd() * 6.0;
+      const op = 0.4 + rnd() * 0.45;
+      const drift = -20 + rnd() * 40;
+
+      const circle = document.createElementNS(NS, "circle");
+      circle.setAttribute("cx", cx.toFixed(1));
+      circle.setAttribute("cy", cy.toFixed(1));
+      circle.setAttribute("r", r.toFixed(1));
+      circle.setAttribute("fill", rnd() < 0.3 ? "#ffffff" : "#a6f4ff");
+      circle.setAttribute("class", "p3r-bubble");
+
+      circle.style.setProperty("--dur", `${dur.toFixed(2)}s`);
+      circle.style.setProperty("--op", op.toFixed(2));
+      circle.style.setProperty("--drift", `${drift.toFixed(1)}px`);
+      circle.style.animationDelay = `${delay.toFixed(2)}s`;
+
+      frag.appendChild(circle);
+    }
+    bubbleContainer.appendChild(frag);
+  }
+})();
+</script>
+</body>
+</html>
