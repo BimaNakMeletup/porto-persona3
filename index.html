@@ -198,40 +198,75 @@
         </div>
 
         <article class="about-card">
-          <div class="about-top">
-            <div class="about-photo">
-              <img src="assets/profile.jpeg" alt="Bima — Developer Profile" onerror="this.src='assets/favicon.png'" />
+          <!-- SVG Outer Beveled Chassis with Stepped Tabs & Notches (Persis Foto Referensi) -->
+          <svg class="about-card-chassis" viewBox="0 0 500 520" preserveAspectRatio="none" aria-hidden="true">
+            <defs>
+              <linearGradient id="ref-card-bg" x1="0" y1="0" x2="0.6" y2="1">
+                <stop offset="0%" stop-color="#051428" />
+                <stop offset="100%" stop-color="#020a16" />
+              </linearGradient>
+            </defs>
+            <!-- Outer Shape Fill -->
+            <polygon points="35,10 210,10 225,0 465,0 500,35 500,230 490,245 490,285 500,300 500,485 465,520 35,520 0,485 0,300 10,285 10,245 0,230 0,35" fill="url(#ref-card-bg)" />
+            <!-- Outer Dark Border Stroke -->
+            <polygon points="35,10 210,10 225,0 465,0 500,35 500,230 490,245 490,285 500,300 500,485 465,520 35,520 0,485 0,300 10,285 10,245 0,230 0,35" fill="none" stroke="#003554" stroke-width="4.5" stroke-linejoin="round" />
+            <!-- Inner Cyan Accent Stroke -->
+            <polygon points="39,18 208,18 223,8 460,8 492,40 492,232 482,247 482,283 492,298 492,480 460,512 39,512 8,480 8,298 18,283 18,247 8,232 8,40" fill="none" stroke="#00d4ff" stroke-width="2.5" stroke-linejoin="round" opacity="0.95" />
+          </svg>
+
+          <!-- Card Content Body -->
+          <div class="about-card-body">
+            <!-- Top Header: Slanted Avatar & Identity -->
+            <div class="about-header-row">
+              <div class="avatar-slanted-wrap">
+                <div class="avatar-slanted-border">
+                  <div class="avatar-slanted-inner">
+                    <img src="assets/profile.jpeg" alt="AdnanBima" onerror="this.src='assets/favicon.png'" />
+                  </div>
+                </div>
+              </div>
+
+              <div class="about-identity">
+                <h2 class="about-name" data-profile-name>AdnanBima</h2>
+                <div class="about-role">Front-End & Back-End Developer</div>
+              </div>
             </div>
 
-            <div class="about-identity">
-              <h2 class="about-name" data-profile-name>ADNAN BIMA</h2>
-              <div class="about-role">Backend Engineer &bull; System Architect</div>
+            <!-- Bio Copy from Reference -->
+            <div class="about-bio-text">
+              <p>
+                Passionate about building reliable, <strong>end-to-end web applications</strong>. Experienced in crafting <strong>intuitive user interfaces</strong> and architecting <strong>robust backend systems</strong>, including REST APIs and real-time WebSockets.
+              </p>
+              <p>
+                Dedicated to writing clean, maintainable code that solves real-world problems.
+              </p>
             </div>
-          </div>
 
-          <div class="about-bio">
-            <p>Full-stack developer focused on backend development and building reliable web applications.
-              Experienced in developing REST APIs, real-time applications using WebSockets, and integrating automated
-              workflows.
-            </p>
-            <p>I enjoy writing clean, maintainable code and building systems that solve real problems. My main
-              technologies include
-              <strong>Laravel (PHP)</strong>, <strong>FastAPI (Python)</strong>, and <strong>Hono (TypeScript)</strong>.
-            </p>
-          </div>
+            <!-- Core Tech Row -->
+            <div class="about-core-tech">
+              <span class="core-tech-label">Core Tech:</span> Laravel &bull; FastAPI &bull; Hono
+            </div>
 
-          <div class="about-stats-grid">
-            <div class="stat-badge">
-              <span class="badge-num">15<sup>+</sup></span>
-              <span class="badge-lbl">PROJECTS</span>
-            </div>
-            <div class="stat-badge">
-              <span class="badge-num">100<sup>%</sup></span>
-              <span class="badge-lbl">INTEGRITY</span>
-            </div>
-            <div class="stat-badge">
-              <span class="badge-num">3<sup>+</sup></span>
-              <span class="badge-lbl">YEARS EXP</span>
+            <!-- Stats Row with Slanted Cyan Slashes -->
+            <div class="about-stats-row">
+              <div class="stat-col">
+                <div class="stat-num">15<span class="stat-mark">+</span></div>
+                <div class="stat-label">PROJECTS</div>
+              </div>
+
+              <span class="stat-slash" aria-hidden="true">/</span>
+
+              <div class="stat-col">
+                <div class="stat-num">100<span class="stat-mark">%</span></div>
+                <div class="stat-label">COMMITMENT</div>
+              </div>
+
+              <span class="stat-slash" aria-hidden="true">/</span>
+
+              <div class="stat-col">
+                <div class="stat-num">3<span class="stat-mark">+</span></div>
+                <div class="stat-label">YEARS EXP</div>
+              </div>
             </div>
           </div>
         </article>
