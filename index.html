@@ -197,168 +197,41 @@
           <h1 class="geo-title">ABOUT</h1>
         </div>
 
-        <article class="about-card p3r-dossier">
-          <!-- Dossier Top Header Bar -->
-          <div class="dossier-header-bar">
-            <div class="dossier-tag-group">
-              <span class="dossier-pill">S.E.E.S. ARCHIVE</span>
-              <span class="dossier-id">ID: 04332303</span>
-            </div>
-            <div class="dossier-status">
-              <span class="status-beacon" aria-hidden="true"></span>
-              <span class="status-label">ACTIVE // OPERATIONAL</span>
-            </div>
-          </div>
-
-          <!-- Sub-Nav Tabs ala Persona 3 -->
-          <nav class="dossier-tabs" role="tablist" aria-label="About Dossier Tabs">
-            <button class="dossier-tab active" data-dossier-tab="profile" type="button" role="tab" aria-selected="true">
-              <span class="tab-num">01</span>
-              <span class="tab-name">OPERATIVE</span>
-            </button>
-            <button class="dossier-tab" data-dossier-tab="specs" type="button" role="tab" aria-selected="false">
-              <span class="tab-num">02</span>
-              <span class="tab-name">LOADOUT</span>
-            </button>
-            <button class="dossier-tab" data-dossier-tab="record" type="button" role="tab" aria-selected="false">
-              <span class="tab-num">03</span>
-              <span class="tab-name">MISSION LOG</span>
-            </button>
-          </nav>
-
-          <!-- TAB 1: OPERATIVE PROFILE -->
-          <div class="dossier-panel active" id="dossier-profile" role="tabpanel">
-            <div class="about-top">
-              <div class="about-photo-wrapper">
-                <div class="about-photo">
-                  <img src="assets/profile.jpeg" alt="Adnan Bima" onerror="this.src='assets/favicon.png'" />
-                </div>
-                <div class="photo-corner-tl" aria-hidden="true"></div>
-                <div class="photo-corner-br" aria-hidden="true"></div>
-              </div>
-
-              <div class="about-identity">
-                <div class="identity-code">// ARCHITECT // BACKEND ENG</div>
-                <h2 class="about-name" data-profile-name>ADNAN BIMA</h2>
-                <div class="about-meta-row">
-                  <span class="meta-item"><span class="meta-label">AFFILIATION:</span> POLINES SEMARANG</span>
-                  <span class="meta-sep">&bull;</span>
-                  <span class="meta-item"><span class="meta-label">BASE:</span> ID (WIB)</span>
-                </div>
-              </div>
+        <article class="about-card">
+          <div class="about-top">
+            <div class="about-photo">
+              <img src="assets/profile.jpeg" alt="Bima — Developer Profile" onerror="this.src='assets/favicon.png'" />
             </div>
 
-            <div class="dossier-section">
-              <div class="section-tag">// DIRECTIVE: CORE PURPOSE</div>
-              <p class="dossier-desc">
-                Membangun fondasi sistem backend yang cepat, terprediksi, dan tangguh di bawah beban tinggi. Berfokus pada 
-                arsitektur <strong>RESTful APIs</strong>, pipeline <strong>WebSockets real-time</strong>, serta automasi aliran data terdistribusi tanpa kompleksitas berlebih.
-              </p>
-            </div>
-
-            <div class="dossier-spec-grid">
-              <div class="dossier-spec-card">
-                <div class="spec-code">SYS_01</div>
-                <div class="spec-title">Architecture</div>
-                <div class="spec-val">Microservices & Event-Driven</div>
-              </div>
-              <div class="dossier-spec-card">
-                <div class="spec-code">SYS_02</div>
-                <div class="spec-title">Primary Stack</div>
-                <div class="spec-val">FastAPI &bull; Hono &bull; Laravel</div>
-              </div>
-              <div class="dossier-spec-card">
-                <div class="spec-code">SYS_03</div>
-                <div class="spec-title">Persistence</div>
-                <div class="spec-val">PostgreSQL & Redis Cache</div>
-              </div>
+            <div class="about-identity">
+              <h2 class="about-name" data-profile-name>ADNAN BIMA</h2>
+              <div class="about-role">Backend Engineer &bull; System Architect</div>
             </div>
           </div>
 
-          <!-- TAB 2: TECHNICAL LOADOUT -->
-          <div class="dossier-panel" id="dossier-specs" role="tabpanel" hidden>
-            <div class="dossier-section">
-              <div class="section-tag">// WEAPONRY: RUNTIME & ARSENAL</div>
-              <div class="loadout-grid">
-                <div class="loadout-row">
-                  <div class="loadout-badge bg-fastapi">FASTAPI</div>
-                  <div class="loadout-info">
-                    <span class="loadout-role">Asynchronous High-Performance API</span>
-                    <span class="loadout-note">Pydantic typing, background workers, WebSocket streams</span>
-                  </div>
-                </div>
-                <div class="loadout-row">
-                  <div class="loadout-badge bg-hono">HONO & BUN</div>
-                  <div class="loadout-info">
-                    <span class="loadout-role">Edge Compute & Sub-ms Cold Start</span>
-                    <span class="loadout-note">TypeScript strict runtime, ultra-lightweight deployment</span>
-                  </div>
-                </div>
-                <div class="loadout-row">
-                  <div class="loadout-badge bg-laravel">LARAVEL</div>
-                  <div class="loadout-info">
-                    <span class="loadout-role">Enterprise Business Logic & Queue System</span>
-                    <span class="loadout-note">Eloquent ORM, scheduled jobs, auth workflows</span>
-                  </div>
-                </div>
-                <div class="loadout-row">
-                  <div class="loadout-badge bg-data">POSTGRES & REDIS</div>
-                  <div class="loadout-info">
-                    <span class="loadout-role">Data Integrity & High-Throughput Memory Layer</span>
-                    <span class="loadout-note">Relational schema design, pub/sub queues, rate limiting</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="dossier-section">
-              <div class="section-tag">// ENGINEERING PHILOSOPHY</div>
-              <ul class="dossier-bullets">
-                <li><strong>Zero Unnecessary Abstraction:</strong> Mengutamakan kode yang mudah dipelihara dan diverifikasi dibanding pola rumit tanpa kebutuhan riil.</li>
-                <li><strong>Measurable Performance:</strong> Optimasi berbasis metrik beban memori, latency p99, dan throughput koneksi.</li>
-                <li><strong>Clean Boundaries:</strong> Isolasi lapisan bisnis, data layer, dan interface controller secara disiplin.</li>
-              </ul>
-            </div>
+          <div class="about-bio">
+            <p>Full-stack developer focused on backend development and building reliable web applications.
+              Experienced in developing REST APIs, real-time applications using WebSockets, and integrating automated
+              workflows.
+            </p>
+            <p>I enjoy writing clean, maintainable code and building systems that solve real problems. My main
+              technologies include
+              <strong>Laravel (PHP)</strong>, <strong>FastAPI (Python)</strong>, and <strong>Hono (TypeScript)</strong>.
+            </p>
           </div>
 
-          <!-- TAB 3: MISSION LOG / CHRONICLE -->
-          <div class="dossier-panel" id="dossier-record" role="tabpanel" hidden>
-            <div class="dossier-section">
-              <div class="section-tag">// MISSION RECORD & TRACK LOG</div>
-              <div class="timeline-stream">
-                <div class="timeline-node">
-                  <div class="node-marker"></div>
-                  <div class="node-header">
-                    <span class="node-year">2024 &mdash; PRESENT</span>
-                    <span class="node-title">High-Concurrency & Edge Systems</span>
-                  </div>
-                  <div class="node-body">
-                    Mengeksplorasi arsitektur API edge menggunakan TypeScript + Hono dan server async FastAPI dengan integrasi real-time WebSockets.
-                  </div>
-                </div>
-
-                <div class="timeline-node">
-                  <div class="node-marker"></div>
-                  <div class="node-header">
-                    <span class="node-year">2023 &mdash; 2024</span>
-                    <span class="node-title">Computer Vision & Automated Workflows</span>
-                  </div>
-                  <div class="node-body">
-                    Merancang proyek computer vision OpenCV (Handtracking gesture viral) dan pipeline automasi backend yang terintegrasi media sosial.
-                  </div>
-                </div>
-
-                <div class="timeline-node">
-                  <div class="node-marker"></div>
-                  <div class="node-header">
-                    <span class="node-year">2022 &mdash; PRESENT</span>
-                    <span class="node-title">Politeknik Negeri Semarang (POLINES)</span>
-                  </div>
-                  <div class="node-body">
-                    Menempuh pendidikan tinggi formal di bidang Teknik Telekomunikasi / Informatika &mdash; memperdalam dasar-dasar networking, struktur data, dan sistem operasi.
-                  </div>
-                </div>
-              </div>
+          <div class="about-stats-grid">
+            <div class="stat-badge">
+              <span class="badge-num">15<sup>+</sup></span>
+              <span class="badge-lbl">PROJECTS</span>
+            </div>
+            <div class="stat-badge">
+              <span class="badge-num">100<sup>%</sup></span>
+              <span class="badge-lbl">INTEGRITY</span>
+            </div>
+            <div class="stat-badge">
+              <span class="badge-num">3<sup>+</sup></span>
+              <span class="badge-lbl">YEARS EXP</span>
             </div>
           </div>
         </article>
