@@ -1097,10 +1097,11 @@ button {
    -------------------------------------------------------------------------- */
 .slink-cards {
   margin-left: 5vw;
+  width: min(480px, 48vw);
+  max-width: 480px;
   display: flex;
   flex-direction: column;
-  gap: clamp(10px, 1.4vh, 15px);
-  width: fit-content;
+  gap: clamp(10px, 1.4vh, 14px);
 }
 
 .slink-card {
@@ -1109,9 +1110,10 @@ button {
   position: relative;
   display: flex;
   flex-direction: column;
-  width: clamp(520px, 48vw, 680px);
-  height: clamp(66px, 8.5vh, 72px);
-  margin-left: calc(var(--card-idx, 0) * 0.35vw);
+  width: 100% !important;
+  max-width: 100% !important;
+  height: clamp(64px, 8vh, 70px);
+  margin-left: 0;
   background: transparent;
   border: none;
   padding: 0;
@@ -1148,7 +1150,9 @@ button {
 }
 
 .slink-card.active {
-  transform: skewX(var(--card-skew)) translateX(16px);
+  width: 100% !important;
+  max-width: 100% !important;
+  transform: skewX(var(--card-skew)) translateX(14px) !important;
   filter: drop-shadow(0 8px 26px rgba(0, 200, 255, 0.55));
   z-index: 10;
 }
@@ -1263,15 +1267,20 @@ button {
   line-height: 1;
 }
 
-/* MAX Rank Badge (Giant Black Heavy Italic) */
+/* MAX Rank Badge */
 .slink-rank-max {
   font-family: var(--font-rodin, sans-serif);
   font-style: italic;
   font-weight: 900;
-  font-size: 2.1rem;
-  color: #020814;
+  font-size: 1.85rem;
+  color: #5ce8ff;
   line-height: 1;
   letter-spacing: -0.04em;
+}
+
+.slink-card.active .slink-rank-max {
+  color: #020814;
+  font-size: 2.1rem;
 }
 
 /* Crimson Red Accent Band on Active */
@@ -1947,17 +1956,12 @@ button {
     font-size: clamp(2.6rem, 3.6vw, 3.2rem);
   }
 
+  .slink-cards {
+    gap: 8px;
+  }
+
   .slink-card {
-    height: 50px;
-    width: clamp(420px, 42vw, 540px);
-  }
-
-  .card-title {
-    font-size: 1.15rem;
-  }
-
-  .card-subtitle {
-    font-size: 0.72rem;
+    height: 58px;
   }
 
   .about-card {
@@ -2298,21 +2302,25 @@ a,
   /* Project */
   .slink-cards {
     margin-left: 4vw;
-    width: min(64vw, 520px);
+    width: min(460px, 52vw);
+    max-width: 460px;
     max-height: none;
     overflow: visible;
-    padding: 8px 28px 24px 12px;
+    padding: 0;
   }
 
   .slink-card {
     --card-skew: -16deg;
     --card-unskew: 16deg;
-    width: min(58vw, 470px);
-    height: 64px;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: 62px;
   }
 
   .slink-card.active {
-    width: min(60vw, 490px) !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    transform: skewX(var(--card-skew)) translateX(12px) !important;
   }
 
   /* Skills */
@@ -2538,22 +2546,26 @@ a,
   .slink-cards {
     margin-left: 0;
     width: 100%;
+    max-width: 100%;
     max-height: none;
     overflow: visible;
-    gap: 9px;
+    gap: 8px;
     padding: 2px 4px 8px 4px;
   }
 
   .slink-card {
     --card-skew: -8deg;
     --card-unskew: 8deg;
-    width: 100%;
-    height: 56px;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: 54px;
     margin-left: 0 !important;
     flex-shrink: 0;
   }
 
   .slink-card.active {
+    width: 100% !important;
+    max-width: 100% !important;
     transform: skewX(var(--card-skew)) translateX(4px) !important;
   }
 
