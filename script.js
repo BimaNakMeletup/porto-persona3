@@ -995,6 +995,31 @@ document.querySelectorAll("[data-action]").forEach((btn) => {
     else if (action === "next-tab") cycleSkillTab(1);
   });
 });
+function initDossierTabs() {
+  const tabs = document.querySelectorAll(".dossier-tab");
+  tabs.forEach((tab) => {
+    tab.addEventListener("click", () => {
+      const target = tab.dataset.dossierTab;
+      tabs.forEach((t) => {
+        const isSelected = t === tab;
+        t.classList.toggle("active", isSelected);
+        t.setAttribute("aria-selected", isSelected ? "true" : "false");
+      });
+      document.querySelectorAll(".dossier-panel").forEach((panel) => {
+        const isMatch = panel.id === `dossier-${target}`;
+        if (isMatch) {
+          panel.removeAttribute("hidden");
+          panel.classList.add("active");
+        } else {
+          panel.setAttribute("hidden", "");
+          panel.classList.remove("active");
+        }
+      });
+      playSound("nav");
+    });
+  });
+}
+
 
 /* ============================================================================
    INIT
@@ -1006,6 +1031,7 @@ renderOptions();
 renderProjects();
 renderSkillTabs();
 renderSkillList();
+initDossierTabs();
 startLoading();
 
 /* ============================================================================
