@@ -302,9 +302,17 @@ function initWaterCanvas() {
     alpha: 0.2 + Math.random() * 0.35,
   }));
 
+  let isWaterRunning = true;
+  window.startWaterLoop = function() {
+    if (!isWaterRunning && !activePage) {
+      isWaterRunning = true;
+      requestAnimationFrame(draw);
+    }
+  };
+
   function draw() {
     if (activePage) {
-      requestAnimationFrame(draw);
+      isWaterRunning = false;
       return;
     }
 
@@ -647,6 +655,7 @@ function closeCurrentPage() {
     pageEl.setAttribute("aria-hidden", "true");
     isTransitioning = false;
     activePage = null;
+    if (window.startWaterLoop) window.startWaterLoop();
   };
 }
 
@@ -816,34 +825,13 @@ let isAssetsLoaded = false;
 function preloadImage(src) {
   return new Promise((resolve) => {
     const img = new Image();
-    img.onload = () => resolve();
-    img.onerror = () => resolve();
     img.src = src;
-  });
-}
-function preloadIframe(el, timeoutMs = 4000) {
-  return new Promise((resolve) => {
-    if (!el) {
-      resolve();
-      return;
+    if (img.decode) {
+      img.decode().then(resolve).catch(resolve);
+    } else {
+      img.onload = () => resolve();
+      img.onerror = () => resolve();
     }
-    try {
-      if (el.contentDocument && el.contentDocument.readyState === "complete") {
-        resolve();
-        return;
-      }
-    } catch (_) {}
-    let done = false;
-    const finish = () => {
-      if (done) return;
-      done = true;
-      el.removeEventListener("load", finish);
-      el.removeEventListener("error", finish);
-      resolve();
-    };
-    el.addEventListener("load", finish, { once: true });
-    el.addEventListener("error", finish, { once: true });
-    setTimeout(finish, timeoutMs);
   });
 }
 
@@ -889,15 +877,11 @@ function startLoading() {
     preloadMediaElement(document.getElementById("sfx-menu-utama-el"), 4000),
     preloadMediaElement(document.getElementById("sfx-navigation-el"), 4000),
     preloadMediaElement(document.getElementById("sfx-close-menu-el"), 4000),
-    // 4. Background Frame & Karakter WebP Sub-Halaman
+    // 4. Background Karakter WebP Sub-Halaman (Pre-decoded ke VRAM)
     preloadImage("project-char.webp"),
     preloadImage("skills-char.webp"),
     preloadImage("about-char.webp"),
     preloadImage("contact-char.webp"),
-    preloadIframe(document.getElementById("project-bg-frame")),
-    preloadIframe(document.getElementById("skills-bg-frame")),
-    preloadIframe(document.getElementById("about-bg-frame")),
-    preloadIframe(document.getElementById("contact-bg-frame")),
   ];
   const total = tasks.length;
   let loadedCount = 0;
@@ -1046,6 +1030,7 @@ document.querySelectorAll("[data-action]").forEach((btn) => {
    ============================================================================ */
 applyProfileName();
 initWaterCanvas();
+if (typeof initSubpageBgParticles === "function") initSubpageBgParticles();
 initSubpageVideoCanvases();
 renderOptions();
 renderProjects();

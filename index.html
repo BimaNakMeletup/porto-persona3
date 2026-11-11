@@ -7,6 +7,7 @@
   <title>Portofolio Bima Ganteng</title>
   <meta name="theme-color" content="#001233" />
   <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="subpage-bg.css" />
 </head>
 
 <body>
@@ -114,7 +115,117 @@
        ========================================================================= -->
   <section id="page-project" class="sub-page page-project" aria-hidden="true" aria-label="Project">
     <div class="sub-video-container" aria-hidden="true">
-      <iframe id="project-bg-frame" class="sub-bg-frame" src="project-bg.html" title="Project Background" tabindex="-1" aria-hidden="true"></iframe>
+      <section class="p3r-project" aria-label="Persona 3 Reload - Project Background Frame">
+
+  <!-- Layer 1: Background SVG (Kanvas Putih + Prisma Samudra Biru Tua + Garis Tebasan Cahaya + Kaustik) -->
+  <svg class="p3r-project__back" viewBox="0 0 1280 720" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <defs>
+      <!-- Moonlight Ice-Silver Canvas Gradient (Elegan, Dingin & Menyatu dengan Palet P3R) -->
+      <linearGradient id="p3r-canvas-ice" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#f8fbff"/>
+        <stop offset="35%" stop-color="#edf4fc"/>
+        <stop offset="70%" stop-color="#dfecf8"/>
+        <stop offset="100%" stop-color="#d0e2f4"/>
+      </linearGradient>
+
+      <!-- Soft Cyan Ambient Glow Radiance dari Prisma ke Kanvas -->
+      <radialGradient id="p3r-cyan-radiance" cx="0.45" cy="0.4" r="0.65">
+        <stop offset="0%" stop-color="#00d4ff" stop-opacity="0.14"/>
+        <stop offset="50%" stop-color="#0099e6" stop-opacity="0.06"/>
+        <stop offset="100%" stop-color="#d0e2f4" stop-opacity="0"/>
+      </radialGradient>
+
+      <!-- Pola Garis Halus Pinstripe Es (Persona Minimalist Geometric Lines) -->
+      <pattern id="p3r-ice-stripes" width="28" height="28" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+        <line x1="0" y1="0" x2="0" y2="28" stroke="#005088" stroke-width="0.8" stroke-opacity="0.045"/>
+      </pattern>
+
+      <!-- Deep Indigo Oceanic Gradient -->
+      <linearGradient id="p3r-indigo-ocean" x1="0" y1="0" x2="0.6" y2="1">
+        <stop offset="0%" stop-color="#001452"/>
+        <stop offset="45%" stop-color="#00227a"/>
+        <stop offset="100%" stop-color="#003db5"/>
+      </linearGradient>
+
+      <!-- Water Surface Wave Gradient -->
+      <linearGradient id="p3r-ocean-caustic-grad" x1="0" y1="0" x2="1" y2="0.4">
+        <stop offset="0%" stop-color="#14c8ff" stop-opacity="0.38"/>
+        <stop offset="50%" stop-color="#0099e6" stop-opacity="0.18"/>
+        <stop offset="100%" stop-color="#003db5" stop-opacity="0"/>
+      </linearGradient>
+
+      <!-- Soft Glow Blur Filter -->
+      <filter id="p3r-project-blur" x="-20%" y="-20%" width="140%" height="140%">
+        <feGaussianBlur stdDeviation="5"/>
+      </filter>
+
+      <!-- Tekstur Halftone Grid Pattern -->
+      <pattern id="p3r-project-dots" width="8" height="8" patternUnits="userSpaceOnUse">
+        <circle cx="4" cy="4" r="1.3" fill="#000e38"/>
+      </pattern>
+      <radialGradient id="p3r-project-mask-grad" cx="0.5" cy="0.4" r="0.6">
+        <stop offset="0%" stop-color="#fff" stop-opacity="0.7"/>
+        <stop offset="70%" stop-color="#fff" stop-opacity="0.25"/>
+        <stop offset="100%" stop-color="#fff" stop-opacity="0"/>
+      </radialGradient>
+      <mask id="p3r-project-texture-mask">
+        <rect width="1280" height="720" fill="url(#p3r-project-mask-grad)"/>
+      </mask>
+    </defs>
+
+    <!-- Base Canvas: Moonlight Ice-Silver Gradient + Ambient Radiance + Pinstripe -->
+    <rect width="1280" height="720" fill="url(#p3r-canvas-ice)"/>
+    <rect width="1280" height="720" fill="url(#p3r-cyan-radiance)"/>
+    <rect width="1280" height="720" fill="url(#p3r-ice-stripes)"/>
+
+    <!-- Prisma Samudra Berlian Biru Tua (Deep Indigo Oceanic Diamond with Crystal Border) -->
+    <polygon points="34,0 660,0 1280,320 950,720 0,600 375,300"
+             fill="url(#p3r-indigo-ocean)"
+             stroke="rgba(140, 225, 255, 0.45)" stroke-width="1.8" stroke-linejoin="round"/>
+    <!-- Gelombang Permukaan Air Dalam Prisma -->
+    <g class="p3r-ocean-caustic">
+      <path d="M 120 40 Q 420 -20 740 60 T 1280 280 L 1280 340 Q 860 120 450 180 T 120 100 Z"
+            fill="url(#p3r-ocean-caustic-grad)" filter="url(#p3r-project-blur)"/>
+      <path d="M 220 120 Q 560 40 880 140 T 1280 380 L 1280 440 Q 940 220 540 280 T 220 180 Z"
+            fill="url(#p3r-ocean-caustic-grad)" filter="url(#p3r-project-blur)" opacity="0.6"/>
+    </g>
+
+    <!-- Tekstur Halftone Lembut di Dalam Prisma -->
+    <polygon points="34,0 660,0 1280,320 950,720 0,600 375,300"
+             fill="url(#p3r-project-dots)" mask="url(#p3r-project-texture-mask)" opacity="0.75"/>
+
+    <!-- Garis Tebasan Cahaya Pedang / Laser Beam (Diagonal Slash) -->
+    <g class="p3r-slash-beam">
+      <line x1="-50" y1="580" x2="1330" y2="-20" stroke="rgba(160, 230, 255, 0.45)" stroke-width="7"/>
+      <line x1="-50" y1="580" x2="1330" y2="-20" stroke="rgba(255, 255, 255, 0.95)" stroke-width="2.5"/>
+    </g>
+
+    <!-- Gelembung Cahaya Air Dalam Samudra -->
+    <g id="p3rOceanBubbles"></g>
+  </svg>
+
+  <!-- Layer 2: Karakter Makoto Yuki dengan Evoker Pistol (project-char.webp dengan Fallback PNG) -->
+  <div class="p3r-project__char-wrap">
+    <picture>
+      <source srcset="project-char.webp" type="image/webp">
+      <img class="p3r-project__char" src="project-char.png" alt="Persona 3 Reload Protagonist - Project" decoding="async" fetchpriority="high">
+    </picture>
+  </div>
+
+  <!-- Layer 3: Foreground Shards Beraneka Warna + Kilatan Evoker -->
+  <svg class="p3r-project__front" viewBox="0 0 1280 720" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <!-- Kilatan Refleksi Moncong Evoker (Lens Flare Glint) -->
+    <g class="p3r-evoker-glint">
+      <polygon points="660,75 663,85 673,85 665,90 668,100 660,94 652,100 655,90 647,85 657,85"
+               fill="#ffffff"/>
+      <circle cx="660" cy="85" r="5" fill="#a4f4ff" opacity="0.9" filter="url(#p3r-project-blur)"/>
+    </g>
+
+    <!-- Kelopak Mawar & Serpihan Kristal Melayang (Rose Petals & Prism Shards) -->
+    <g id="p3rProjectShards"></g>
+  </svg>
+
+</section>
     </div>
 
     <div class="page-viewport">
@@ -142,7 +253,123 @@
        ========================================================================= -->
   <section id="page-skills" class="sub-page page-skills" aria-hidden="true" aria-label="Skills">
     <div class="sub-video-container" aria-hidden="true">
-      <iframe id="skills-bg-frame" class="sub-bg-frame" src="skills-bg.html" title="Skills Background" tabindex="-1" aria-hidden="true"></iframe>
+      <section class="p3r-skills" aria-label="Persona 3 Reload - Skills Background Frame">
+
+  <!-- Layer 1: Background SVG (Gradasi Laut + God Rays + Dual Caustics + Halftone + Shards Belakang) -->
+  <svg class="p3r-skills__back" viewBox="0 0 1280 720" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <defs>
+      <!-- Base Cyan/Turquoise Ocean Gradient -->
+      <linearGradient id="p3r-skills-base" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#22c4f5"/>
+        <stop offset="45%" stop-color="#1bbbee"/>
+        <stop offset="100%" stop-color="#0f92c6"/>
+      </linearGradient>
+
+      <!-- Underwater Sunbeam / God Ray Gradient -->
+      <linearGradient id="p3r-ray-grad" x1="0.8" y1="0" x2="0.2" y2="1">
+        <stop offset="0%" stop-color="#ffffff" stop-opacity="0.45"/>
+        <stop offset="35%" stop-color="#a6f2ff" stop-opacity="0.22"/>
+        <stop offset="100%" stop-color="#1bbbee" stop-opacity="0"/>
+      </linearGradient>
+
+      <!-- Water Caustic Ribbon Gradient 1 -->
+      <linearGradient id="p3r-caustic-grad-1" x1="0" y1="0" x2="0.8" y2="1">
+        <stop offset="0%" stop-color="#72e6ff" stop-opacity="0.38"/>
+        <stop offset="50%" stop-color="#28d0ff" stop-opacity="0.16"/>
+        <stop offset="100%" stop-color="#0d84b8" stop-opacity="0"/>
+      </linearGradient>
+
+      <!-- Water Caustic Ribbon Gradient 2 -->
+      <linearGradient id="p3r-caustic-grad-2" x1="0.2" y1="0" x2="0.9" y2="1">
+        <stop offset="0%" stop-color="#90f0ff" stop-opacity="0.32"/>
+        <stop offset="60%" stop-color="#3de0ff" stop-opacity="0.12"/>
+        <stop offset="100%" stop-color="#077aa8" stop-opacity="0"/>
+      </linearGradient>
+
+      <!-- Soft Glow Blur Filter -->
+      <filter id="p3r-skills-blur" x="-20%" y="-20%" width="140%" height="140%">
+        <feGaussianBlur stdDeviation="6"/>
+      </filter>
+
+      <!-- Tekstur Halftone Grid Pattern -->
+      <pattern id="p3r-skills-dots" width="8" height="8" patternUnits="userSpaceOnUse">
+        <circle cx="4" cy="4" r="1.35" fill="#034862"/>
+      </pattern>
+      <radialGradient id="p3r-skills-mask-grad" cx="0.25" cy="0.65" r="0.75">
+        <stop offset="0%" stop-color="#fff" stop-opacity="0.75"/>
+        <stop offset="60%" stop-color="#fff" stop-opacity="0.35"/>
+        <stop offset="100%" stop-color="#fff" stop-opacity="0"/>
+      </radialGradient>
+      <mask id="p3r-skills-texture-mask">
+        <rect width="1280" height="720" fill="url(#p3r-skills-mask-grad)"/>
+      </mask>
+    </defs>
+
+    <!-- Base Canvas Background -->
+    <rect width="1280" height="720" fill="url(#p3r-skills-base)"/>
+
+    <!-- Underwater Sunbeams (God Rays) -->
+    <g class="p3r-god-rays">
+      <polygon points="1220,-50 1380,-50 980,750 780,750" fill="url(#p3r-ray-grad)"/>
+      <polygon points="1080,-50 1190,-50 680,750 530,750" fill="url(#p3r-ray-grad)"/>
+      <polygon points="920,-50 1000,-50 440,750 340,750" fill="url(#p3r-ray-grad)" opacity="0.7"/>
+      <polygon points="760,-50 820,-50 260,750 180,750" fill="url(#p3r-ray-grad)" opacity="0.45"/>
+    </g>
+
+    <!-- Dual-Layer Water Caustics -->
+    <g class="p3r-caustic-layer-1">
+      <path d="M -80 180 Q 240 80 620 220 T 1360 140 L 1360 480 Q 880 380 440 520 T -80 420 Z"
+            fill="url(#p3r-caustic-grad-1)" filter="url(#p3r-skills-blur)"/>
+    </g>
+    <g class="p3r-caustic-layer-2">
+      <path d="M -60 300 Q 340 220 800 320 T 1360 240 L 1360 620 Q 940 500 500 640 T -60 560 Z"
+            fill="url(#p3r-caustic-grad-2)" filter="url(#p3r-skills-blur)"/>
+    </g>
+
+    <!-- Tekstur Halftone Lembut -->
+    <rect width="1280" height="720" fill="url(#p3r-skills-dots)" mask="url(#p3r-skills-texture-mask)" opacity="0.8"/>
+
+    <!-- Garis Busur Tipis Aksen -->
+    <path d="M 120 740 Q 640 420 1340 580" fill="none" stroke="#004662" stroke-width="2.2" opacity="0.65"/>
+    <path d="M 280 740 Q 740 460 1340 640" fill="none" stroke="#68e5ff" stroke-width="1.6" opacity="0.55"/>
+
+    <!-- Shards Belakang Karakter (Lapisan Kedalaman) -->
+    <g id="p3rBackShards"></g>
+
+    <!-- Gelembung Air / Partikel Cahaya Bawah Air -->
+    <g id="p3rBubbles"></g>
+  </svg>
+
+  <!-- Layer 2: Karakter Makoto Yuki (skills-char.webp dengan PNG Fallback & Floating Halus) -->
+  <div class="p3r-skills__char-wrap">
+    <picture>
+      <source srcset="skills-char.webp" type="image/webp">
+      <img class="p3r-skills__char" src="skills-char.png" alt="Persona 3 Reload Protagonist - Skills" decoding="async" fetchpriority="high">
+    </picture>
+
+    <!-- Headphone Acoustic Soundwave Ripples (Mengikuti gerakan kepala) -->
+    <svg viewBox="0 0 1280 720" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <circle cx="855" cy="542" r="14" fill="none" class="p3r-hp-ring"/>
+      <circle cx="855" cy="542" r="14" fill="none" class="p3r-hp-ring"/>
+      <circle cx="855" cy="542" r="14" fill="none" class="p3r-hp-ring"/>
+      <circle cx="855" cy="542" r="14" fill="none" class="p3r-hp-ring"/>
+    </svg>
+  </div>
+
+  <!-- Layer 3: Foreground Shards Beraneka Warna + Kilatan Gesper Evoker -->
+  <svg class="p3r-skills__front" viewBox="0 0 1280 720" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <!-- Kilatan Refleksi Gesper Evoker (Glint / Lens Flare) -->
+    <g class="p3r-buckle-glint">
+      <polygon points="414,394 417,404 427,404 419,409 422,419 414,413 406,419 409,409 401,404 411,404"
+               fill="#ffffff"/>
+      <circle cx="414" cy="404" r="5" fill="#a4f4ff" opacity="0.9" filter="url(#p3r-skills-blur)"/>
+    </g>
+
+    <!-- Serpihan Kaca Prismatik Depan (Hijau, Ungu, Cyan, Putih) -->
+    <g id="p3rSkillsShards"></g>
+  </svg>
+
+</section>
     </div>
 
     <div class="page-viewport">
@@ -185,7 +412,88 @@
        ========================================================================= -->
   <section id="page-about" class="sub-page page-about" aria-hidden="true" aria-label="About">
     <div class="sub-video-container" aria-hidden="true">
-      <iframe id="about-bg-frame" class="sub-bg-frame" src="about-bg.html" title="About Background" tabindex="-1" aria-hidden="true"></iframe>
+      <section class="p3r-about" aria-label="Persona 3 Reload - About Background Frame">
+
+  <!-- Layer 1: Background SVG (Gradasi Cyan Asli + Sabuk Teal Otentik + Gelombang Sonar + Shadow Persona) -->
+  <svg class="p3r-about__back" viewBox="0 0 1280 720" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <defs>
+      <!-- Base Cyan/Turquoise Gradient -->
+      <linearGradient id="p3r-about-base" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#1ec8f0"/>
+        <stop offset="0.55" stop-color="#14b5dc"/>
+        <stop offset="1" stop-color="#0e96b6"/>
+      </linearGradient>
+      <!-- Tekstur Halftone Grid Pattern (Optimized) -->
+      <pattern id="p3r-about-dots" width="16" height="16" patternUnits="userSpaceOnUse">
+        <circle cx="8" cy="8" r="1.6" fill="#014a60"/>
+      </pattern>
+      <radialGradient id="p3r-dots-mask-grad" cx="0.32" cy="0.45" r="0.75">
+        <stop offset="0%" stop-color="#fff" stop-opacity="0.85"/>
+        <stop offset="60%" stop-color="#fff" stop-opacity="0.4"/>
+        <stop offset="100%" stop-color="#fff" stop-opacity="0"/>
+      </radialGradient>
+      <mask id="p3r-about-texture-mask">
+        <rect width="1280" height="720" fill="url(#p3r-dots-mask-grad)"/>
+      </mask>
+    </defs>
+
+    <!-- Base Canvas Background -->
+    <rect width="1280" height="720" fill="url(#p3r-about-base)"/>
+
+    <!-- Lingkaran Konsentris Otentik P3R (Sabuk Teal Solid Asli) -->
+    <g class="p3r-arcs-group">
+      <!-- Cincin Teal Dalam (Radius 220 s/d 610) -->
+      <path d="M 665 -20 M 445 -20 A 220 220 0 1 0 885 -20 A 220 220 0 1 0 445 -20 Z
+               M 55 -20 A 610 610 0 1 1 1275 -20 A 610 610 0 1 1 55 -20 Z"
+            fill="#0080a9" fill-opacity="0.9" fill-rule="evenodd"/>
+
+      <!-- Cincin Teal Luar (Radius 950 s/d 1400) -->
+      <path d="M 665 -20 M -285 -20 A 950 950 0 1 0 1615 -20 A 950 950 0 1 0 -285 -20 Z
+               M -735 -20 A 1400 1400 0 1 1 2065 -20 A 1400 1400 0 1 1 -735 -20 Z"
+            fill="#007296" fill-opacity="0.55" fill-rule="evenodd"/>
+
+      <!-- Garis Busur Tipis Aksen -->
+      <circle cx="665" cy="-20" r="460" fill="none" stroke="#004866" stroke-width="2.5" opacity="0.75"/>
+      <circle cx="665" cy="-20" r="800" fill="none" stroke="#5ce8ff" stroke-width="1.8" opacity="0.65"/>
+    </g>
+
+    <!-- Cincin Sonar Halus yang Membesar (Expanding Sonar Pulse - Halus & Rapi) -->
+    <g id="p3rSonarPulse">
+      <circle cx="665" cy="-20" r="600" fill="none" class="p3r-sonar-ring"/>
+      <circle cx="665" cy="-20" r="600" fill="none" class="p3r-sonar-ring"/>
+      <circle cx="665" cy="-20" r="600" fill="none" class="p3r-sonar-ring"/>
+      <circle cx="665" cy="-20" r="600" fill="none" class="p3r-sonar-ring"/>
+    </g>
+
+    <!-- Tekstur Halftone Grid (Menggantikan siluet lama agar latar belakang bersih & berdimensi) -->
+    <rect width="1280" height="720" fill="url(#p3r-about-dots)" mask="url(#p3r-about-texture-mask)" opacity="0.8"/>
+
+    <!-- Garis lengkung tipis di belakang karakter -->
+    <path d="M -50 360 Q 640 60 1350 420" fill="none" stroke="#004e66" stroke-width="2.5" opacity="0.75"/>
+  </svg>
+
+  <!-- Layer 2: Karakter Makoto Yuki (about-char.png - Floating Halus, Anchored Rapi di Bawah) -->
+  <!-- Layer 2: Karakter Makoto Yuki (Optimized WebP with PNG Fallback & Async Decode) -->
+  <div class="p3r-about__char-wrap">
+    <picture>
+      <source srcset="about-char.webp" type="image/webp">
+      <img class="p3r-about__char" src="about-char.png" alt="Persona 3 Reload Protagonist - About" decoding="async" fetchpriority="high">
+    </picture>
+  <!-- Layer 3: Foreground Shards & Glowing MP3 Light -->
+  <svg class="p3r-about__front" viewBox="0 0 1280 720" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <!-- Sorot Cahaya Hijau Neon pada MP3 Player / Holster -->
+    <g class="p3r-mp3-glow">
+      <ellipse cx="538" cy="416" rx="20" ry="8" fill="#00ffc4" opacity="0.85"/>
+      <ellipse cx="538" cy="416" rx="10" ry="4" fill="#ffffff" opacity="0.95"/>
+    </g>
+
+    <!-- Serpihan Segitiga Melayang (Floating Shards) -->
+    <g id="p3rAboutShards" fill="#7be9ff"></g>
+  </svg>
+
+  <!-- Layer 4: Interactive Click Ripples -->
+  <div class="p3r-click-layer" id="p3rClickLayer"></div>
+</section>
     </div>
 
     <div class="page-viewport">
@@ -284,7 +592,134 @@
        ========================================================================= -->
   <section id="page-contact" class="sub-page page-contact" aria-hidden="true" aria-label="Contact">
     <div class="sub-video-container" aria-hidden="true">
-      <iframe id="contact-bg-frame" class="sub-bg-frame" src="contact-bg.html" title="Contact Background" tabindex="-1" aria-hidden="true"></iframe>
+      <section class="p3r" aria-label="Persona 3 Reload Animated Frame">
+
+  <!-- Layer 1: Background & Teks Vertikal -->
+  <svg class="p3r__back" viewBox="0 0 1024 576" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <defs>
+      <linearGradient id="p3r-base" x1="0" y1="0" x2="1" y2="0.6">
+        <stop offset="0" stop-color="#2a9cf0"/>
+        <stop offset="0.45" stop-color="#1a7fe0"/>
+        <stop offset="1" stop-color="#1462cf"/>
+      </linearGradient>
+      <pattern id="p3r-dots" width="6" height="6" patternUnits="userSpaceOnUse">
+        <circle cx="3" cy="3" r="1.25" fill="#04245c"/>
+      </pattern>
+      <radialGradient id="p3r-dots-fade" cx="0.55" cy="0.45" r="0.8">
+        <stop offset="0" stop-color="#fff" stop-opacity="0.75"/>
+        <stop offset="1" stop-color="#fff" stop-opacity="0.45"/>
+      </radialGradient>
+      <mask id="p3r-dots-mask">
+        <rect width="1024" height="576" fill="url(#p3r-dots-fade)"/>
+      </mask>
+      <filter id="p3r-soft" x="-20%" y="-20%" width="140%" height="140%">
+        <feGaussianBlur stdDeviation="6"/>
+      </filter>
+    </defs>
+
+    <rect width="1024" height="576" fill="url(#p3r-base)"/>
+
+    <!-- blok biru tua bersudut -->
+    <g fill="#1d3ee8" opacity="0.85" filter="url(#p3r-soft)">
+      <polygon points="680,0 1024,0 1024,230 900,250 820,170 700,120"/>
+      <polygon points="600,420 700,400 720,576 590,576"/>
+    </g>
+
+    <rect width="1024" height="576" fill="url(#p3r-dots)" mask="url(#p3r-dots-mask)"/>
+
+    <!-- garis outline tipis -->
+    <g fill="none" stroke="#b8e0ff" stroke-opacity="0.55" stroke-width="1.6" stroke-linejoin="round">
+      <rect x="602" y="330" width="46" height="190" rx="6"/>
+      <rect x="612" y="342" width="26" height="166" rx="4"/>
+      <path d="M720 40 H800 Q812 40 812 52 V200 H760"/>
+      <path d="M732 54 H796 V186"/>
+      <path d="M560 90 V20 H660"/>
+    </g>
+
+    <!-- teks vertikal kanan atas (di belakang karakter) -->
+    <g fill="none" stroke-linejoin="round">
+      <text transform="translate(932 4) rotate(90)" font-size="58" font-weight="900"
+            letter-spacing="2" stroke="#fff" stroke-width="3">PORTOFOLIO</text>
+      <text transform="translate(850 30) rotate(90)" font-size="50" font-weight="900"
+            letter-spacing="10" stroke="#cfe9ff" stroke-opacity="0.85" stroke-width="2">P3R</text>
+      <text transform="translate(800 20) rotate(90)" font-size="50" font-weight="900"
+            letter-spacing="10" stroke="#cfe9ff" stroke-opacity="0.35" stroke-width="1.5">P3R</text>
+    </g>
+  </svg>
+
+  <!-- Layer 2: Karakter Makoto Yuki + Riak Suara (Floating Halus & Alami) -->
+  <div class="p3r__char-wrap">
+    <picture>
+      <source srcset="contact-char.webp" type="image/webp">
+      <img class="p3r__char" src="contact-char.png" alt="Persona 3 Protagonist" decoding="async" fetchpriority="high">
+    </picture>
+
+    <!-- Gelombang Riak Suara Headphone (Mengikuti posisi karakter saat floating) -->
+    <svg class="p3r__ripples" viewBox="0 0 1024 576" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <circle cx="714" cy="308" r="18" fill="none" class="p3r-ring"/>
+      <circle cx="714" cy="308" r="18" fill="none" class="p3r-ring"/>
+      <circle cx="714" cy="308" r="18" fill="none" class="p3r-ring"/>
+      <circle cx="714" cy="308" r="18" fill="none" class="p3r-ring"/>
+      <circle cx="714" cy="308" r="18" fill="none" class="p3r-ring"/>
+    </svg>
+  </div>
+  <!-- Layer 3: Layer Depan (Panel gelap, hexagon, glow, visualizer, logo P3, serpihan) -->
+  <svg class="p3r__front" viewBox="0 0 1024 576" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <defs>
+      <linearGradient id="p3r-panel" x1="0" y1="0" x2="0.4" y2="1">
+        <stop offset="0" stop-color="#070b14"/>
+        <stop offset="1" stop-color="#0b1424"/>
+      </linearGradient>
+      <clipPath id="p3r-panel-clip">
+        <polygon points="0,0 41,0 440,576 0,576"/>
+      </clipPath>
+      <radialGradient id="p3r-hex-fade" cx="0.05" cy="0.95" r="0.9">
+        <stop offset="0" stop-color="#fff" stop-opacity="1"/>
+        <stop offset="0.6" stop-color="#fff" stop-opacity="0.45"/>
+        <stop offset="1" stop-color="#fff" stop-opacity="0.15"/>
+      </radialGradient>
+      <mask id="p3r-hex-mask">
+        <rect width="1024" height="576" fill="url(#p3r-hex-fade)"/>
+      </mask>
+      <linearGradient id="p3r-glow" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0" stop-color="#1a8cff" stop-opacity="0"/>
+        <stop offset="0.55" stop-color="#2fb0ff" stop-opacity="0.9"/>
+        <stop offset="0.85" stop-color="#bff0ff"/>
+        <stop offset="1" stop-color="#ffffff"/>
+      </linearGradient>
+    </defs>
+
+    <!-- panel gelap diagonal -->
+    <polygon points="0,0 41,0 440,576 0,576" fill="url(#p3r-panel)"/>
+    <g id="p3r-hex" clip-path="url(#p3r-panel-clip)" mask="url(#p3r-hex-mask)"></g>
+
+    <!-- glow cyan berdenyut di belakang teks RELOAD -->
+    <g class="p3r-glow-pulse">
+      <rect x="70" y="186" width="160" height="36" fill="url(#p3r-glow)"/>
+      <rect x="110" y="192" width="110" height="24" fill="url(#p3r-glow)"/>
+    </g>
+
+    <!-- gelombang visualizer audio (berdenyut dinamis) -->
+    <g id="p3r-wave" fill="none" stroke="#fff" stroke-width="1.5"></g>
+
+    <!-- logo P3 -->
+    <g fill="none" stroke-linejoin="round">
+      <g stroke="#fff" stroke-width="17">
+        <path d="M76 118 V38 H150 Q162 38 162 50 V66 Q162 78 150 78 H76"/>
+        <path d="M184 38 H274 Q288 38 288 50 V106 Q288 118 274 118 H184 M206 78 H288"/>
+      </g>
+      <g stroke="#060b16" stroke-width="2.5">
+        <path d="M76 118 V38 H150 Q162 38 162 50 V66 Q162 78 150 78 H76"/>
+        <path d="M184 38 H274 Q288 38 288 50 V106 Q288 118 274 118 H184 M206 78 H288"/>
+      </g>
+    </g>
+    <text x="44" y="172" font-size="31" font-weight="400" fill="#fff" stroke="#fff" stroke-width="0.6"
+          textLength="266" lengthAdjust="spacingAndGlyphs">MYWEB</text>
+
+    <!-- serpihan segitiga melayang & berputar -->
+    <g id="p3r-shards" fill="#9ad8ff"></g>
+  </svg>
+</section>
     </div>
 
     <div class="page-viewport contact-viewport">
@@ -388,6 +823,7 @@
     </div>
   </section>
 
+  <script src="subpage-particles.js"></script>
   <script src="script.js"></script>
 </body>
 

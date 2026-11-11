@@ -919,6 +919,11 @@ button {
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
 }
+body:has(.sub-page.active) .homepage-water-stage *,
+body:has(.sub-page.circle-transitioning) .homepage-water-stage * {
+  animation-play-state: paused !important;
+}
+
 
 .sub-video-container {
   position: absolute;

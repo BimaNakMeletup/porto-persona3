@@ -1,0 +1,857 @@
+/* ===== SUBPAGE NATIVE BACKGROUNDS (100% BEBAS IFRAME — 60 FPS) ===== */
+
+/* --- project-bg.html --- */
+
+  
+  
+
+  /* ===== FULLSCREEN CONTAINER (OPTIMIZED WITH CSS CONTAINMENT) ===== */
+  .p3r-project {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background: #eef5fc;
+    isolation: isolate;
+    contain: strict;
+  }
+
+  .p3r-project svg,
+  .p3r-project__char-wrap {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  /* ===== 1. DIAGONAL SLASH LIGHT BEAM PULSE ===== */
+  .p3r-slash-beam {
+    will-change: opacity, transform;
+    animation: p3r-slash-pulse 4s ease-in-out infinite alternate;
+  }
+
+  @keyframes p3r-slash-pulse {
+    0% {
+      opacity: 0.65;
+      stroke-width: 2px;
+    }
+    100% {
+      opacity: 1;
+      stroke-width: 3.5px;
+    }
+  }
+
+  /* ===== 2. WATER SURFACE CAUSTIC RIPPLE ===== */
+  .p3r-ocean-caustic {
+    will-change: transform, opacity;
+    animation: p3r-caustic-drift 6s ease-in-out infinite alternate;
+  }
+
+  @keyframes p3r-caustic-drift {
+    0% {
+      transform: translate3d(0, 0, 0) scale(1);
+      opacity: 0.7;
+    }
+    100% {
+      transform: translate3d(12px, -8px, 0) scale(1.02);
+      opacity: 0.95;
+    }
+  }
+
+  /* ===== 3. OCEAN SWELL / ARUS LAUT FLOATING ANIMATION ===== */
+  .p3r-project__char-wrap {
+    position: absolute;
+    left: -2%;
+    right: -2%;
+    top: -4%;
+    bottom: 4%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 5;
+    will-change: transform;
+    transform-origin: 50% 15%;
+    animation: p3r-ocean-current-drift 7.5s cubic-bezier(0.44, 0.05, 0.25, 0.95) infinite;
+  }
+
+  @keyframes p3r-ocean-current-drift {
+    0% {
+      transform: translate3d(0, 0, 0) rotate(0deg);
+    }
+    25% {
+      /* Terayun terbawa arus ke kanan-bawah */
+      transform: translate3d(8px, 6px, 0) rotate(0.85deg);
+    }
+    50% {
+      /* Titik rendam terdalam arus laut */
+      transform: translate3d(0, 11px, 0) rotate(0deg);
+    }
+    75% {
+      /* Terangkat dan berayun ke kiri */
+      transform: translate3d(-8px, 5px, 0) rotate(-0.75deg);
+    }
+    100% {
+      transform: translate3d(0, 0, 0) rotate(0deg);
+    }
+  }
+  .p3r-project__char {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    pointer-events: none;
+    user-select: none;
+  }
+  /* Responsive Tablet & Mobile (Karakter Utuh Tanpa Terpotong) */
+  @media (max-width: 1024px) {
+    .p3r-project__char-wrap {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+    .p3r-project__char {
+      position: absolute;
+      right: -2%;
+      top: 50%;
+      transform: translateY(-50%);
+      height: 85vh;
+      max-height: 880px;
+      width: auto;
+      max-width: none;
+      object-fit: contain;
+    }
+  }
+  @media (max-width: 767px) {
+    .p3r-project__char {
+      right: auto;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      height: 80vh;
+      max-height: 700px;
+      opacity: 0.65;
+    }
+  }
+
+  /* ===== 4. FLOATING PRISM SHARDS & ROSE PETALS ===== */
+  .p3r-shard {
+    transform-box: fill-box;
+    transform-origin: center center;
+    will-change: transform, opacity;
+    animation: p3r-shard-drift 4.2s ease-in-out infinite;
+  }
+
+  @keyframes p3r-shard-drift {
+    0%, 100% {
+      transform: translate3d(0, 0, 0) rotate(0deg);
+      opacity: 0.85;
+    }
+    50% {
+      transform: translate3d(var(--tx, 8px), var(--ty, -24px), 0) rotate(var(--rot, 25deg));
+      opacity: 0.35;
+    }
+  }
+
+  /* Shard / Petal Colors */
+  .shard-rose   { fill: #ff1776; }
+  .shard-cyan   { fill: #00e5ff; }
+  .shard-white  { fill: #ffffff; }
+  .shard-violet { fill: #b388ff; }
+
+  /* ===== 5. UNDERWATER RISING BUBBLES / LIGHT MOTES ===== */
+  .p3r-ocean-bubble {
+    will-change: transform, opacity;
+    animation: p3r-bubble-float var(--dur, 6s) ease-in infinite;
+  }
+
+  @keyframes p3r-bubble-float {
+    0% {
+      transform: translate3d(0, 0, 0);
+      opacity: 0;
+    }
+    20% {
+      opacity: var(--op, 0.7);
+    }
+    85% {
+      opacity: var(--op, 0.7);
+    }
+    100% {
+      transform: translate3d(var(--drift, 14px), -240px, 0);
+      opacity: 0;
+    }
+  }
+  /* ===== 5. EVOKER PISTOL BARREL GLINT ===== */
+  .p3r-evoker-glint {
+    transform-origin: 660px 85px;
+    animation: p3r-glint-flash 4s ease-in-out infinite;
+  }
+
+  @keyframes p3r-glint-flash {
+    0%, 82%, 100% {
+      opacity: 0;
+      transform: scale(0.2) rotate(0deg);
+    }
+    89% {
+      opacity: 1;
+      transform: scale(1.2) rotate(45deg);
+    }
+    94% {
+      opacity: 0.35;
+      transform: scale(0.6) rotate(90deg);
+    }
+  }
+
+
+/* --- skills-bg.html --- */
+
+  
+  
+
+  /* ===== FULLSCREEN CONTAINER (OPTIMIZED WITH CSS CONTAINMENT) ===== */
+  .p3r-skills {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background: #1bbbee;
+    isolation: isolate;
+    contain: strict;
+  }
+
+  .p3r-skills svg,
+  .p3r-skills__char-wrap {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  /* ===== 1. UNDERWATER SUNBEAMS / GOD RAYS ===== */
+  .p3r-god-rays {
+    transform-origin: 1100px -50px;
+    will-change: transform, opacity;
+    animation: p3r-ray-drift 8s ease-in-out infinite alternate;
+  }
+
+  @keyframes p3r-ray-drift {
+    0% {
+      opacity: 0.35;
+      transform: skewX(0deg);
+    }
+    50% {
+      opacity: 0.65;
+      transform: skewX(-2.5deg);
+    }
+    100% {
+      opacity: 0.42;
+      transform: skewX(-1.2deg);
+    }
+  }
+
+  /* ===== 2. DUAL-LAYER WATER CAUSTICS ===== */
+  .p3r-caustic-layer-1 {
+    will-change: transform, opacity;
+    animation: p3r-caustic-drift-1 7s ease-in-out infinite alternate;
+  }
+
+  @keyframes p3r-caustic-drift-1 {
+    0% {
+      transform: scale3d(1, 1, 1) translate3d(0, 0, 0);
+      opacity: 0.75;
+    }
+    100% {
+      transform: scale3d(1.03, 1.02, 1) translate3d(16px, -14px, 0);
+      opacity: 0.95;
+    }
+  }
+
+  .p3r-caustic-layer-2 {
+    will-change: transform, opacity;
+    animation: p3r-caustic-drift-2 9s ease-in-out infinite alternate;
+  }
+
+  @keyframes p3r-caustic-drift-2 {
+    0% {
+      transform: scale3d(1.02, 1.03, 1) translate3d(12px, 10px, 0);
+      opacity: 0.6;
+    }
+    100% {
+      transform: scale3d(1, 1, 1) translate3d(-15px, -8px, 0);
+      opacity: 0.85;
+    }
+  }
+
+  /* ===== 3. KARAKTER MAKOTO YUKI (FLOATING KE BAWAH & KE KIRI) ===== */
+  .p3r-skills__char-wrap {
+    position: absolute;
+    left: -3%;
+    right: 0;
+    top: 4%;
+    bottom: -4%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 5;
+    will-change: transform;
+    transform-origin: 30% 70%;
+    animation: p3r-drift-down-left 5.4s cubic-bezier(0.42, 0.08, 0.28, 1) infinite alternate;
+  }
+
+  @keyframes p3r-drift-down-left {
+    0% {
+      transform: translate3d(0, 0, 0) rotate(0deg);
+    }
+    100% {
+      /* Mengambang lebih terasa ke arah bawah (+14px) dan ke kiri (-18px) */
+      transform: translate3d(-18px, 14px, 0) rotate(-0.8deg);
+    }
+  }
+  .p3r-skills__char {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: left bottom;
+    pointer-events: none;
+    user-select: none;
+  }
+  /* Responsive Tablet & Mobile (Karakter Utuh Tanpa Terpotong) */
+  @media (max-width: 1024px) {
+    .p3r-skills__char-wrap {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+    .p3r-skills__char {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      height: 70vh;
+      max-height: 720px;
+      width: auto;
+      max-width: none;
+      object-fit: contain;
+      transform: translateX(-24%);
+    }
+  }
+  @media (max-width: 767px) {
+    .p3r-skills__char {
+      bottom: -10px;
+      height: 52vh;
+      max-height: 480px;
+      transform: translateX(-22%);
+      opacity: 0.65;
+    }
+  }
+
+  /* ===== 4. HEADPHONE ACOUSTIC RIPPLES ===== */
+  .p3r-hp-ring {
+    transform-origin: 855px 542px;
+    animation: p3r-sonar-ring 2.4s cubic-bezier(0.1, 0.7, 0.2, 1) infinite;
+  }
+  .p3r-hp-ring:nth-child(2) { animation-delay: 0.4s; }
+  .p3r-hp-ring:nth-child(3) { animation-delay: 0.8s; }
+  .p3r-hp-ring:nth-child(4) { animation-delay: 1.3s; }
+
+  @keyframes p3r-sonar-ring {
+    0% {
+      r: 12px;
+      stroke-width: 3px;
+      stroke: #5ce8ff;
+      opacity: 0.95;
+    }
+    60% {
+      stroke: #00b4d8;
+      opacity: 0.55;
+    }
+    100% {
+      r: 65px;
+      stroke-width: 0.8px;
+      stroke: #007799;
+      opacity: 0;
+    }
+  }
+
+  /* ===== 5. EVOKER BUCKLE METALLIC GLINT ===== */
+  .p3r-buckle-glint {
+    transform-origin: 414px 404px;
+    animation: p3r-glint-flash 4s ease-in-out infinite;
+  }
+
+  @keyframes p3r-glint-flash {
+    0%, 80%, 100% {
+      opacity: 0;
+      transform: scale(0.2) rotate(0deg);
+    }
+    88% {
+      opacity: 1;
+      transform: scale(1.2) rotate(45deg);
+    }
+    94% {
+      opacity: 0.4;
+      transform: scale(0.6) rotate(90deg);
+    }
+  }
+
+  /* ===== 6. MULTICOLOR FLOATING PRISM SHARDS ===== */
+  .p3r-shard {
+    transform-box: fill-box;
+    transform-origin: center center;
+    will-change: transform, opacity;
+    animation: p3r-prism-float 4.5s ease-in-out infinite;
+  }
+
+  @keyframes p3r-prism-float {
+    0%, 100% {
+      transform: translate3d(0, 0, 0) rotate(0deg);
+      opacity: 0.85;
+    }
+    50% {
+      transform: translate3d(var(--tx, 10px), var(--ty, -26px), 0) rotate(var(--rot, 28deg));
+      opacity: 0.3;
+    }
+  }
+
+  /* Shard Colors */
+  .shard-green  { fill: #00e676; }
+  .shard-purple { fill: #b388ff; }
+  .shard-cyan   { fill: #80d8ff; }
+  .shard-white  { fill: #ffffff; }
+  /* ===== 7. RISING WATER BUBBLES / LIGHT MOTES ===== */
+  .p3r-bubble {
+    will-change: transform, opacity;
+    animation: p3r-bubble-rise var(--dur, 6s) linear infinite;
+  }
+
+  @keyframes p3r-bubble-rise {
+    0% {
+      transform: translate3d(0, 0, 0);
+      opacity: 0;
+    }
+    15% {
+      opacity: var(--op, 0.75);
+    }
+    85% {
+      opacity: var(--op, 0.75);
+    }
+    100% {
+      transform: translate3d(var(--drift, 18px), -380px, 0);
+      opacity: 0;
+    }
+  }
+
+
+/* --- about-bg.html --- */
+
+  
+  
+
+  /* ===== FULLSCREEN CONTAINER (OPTIMIZED WITH CSS CONTAINMENT) ===== */
+  .p3r-about {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background: #14c1f9;
+    isolation: isolate;
+    contain: strict;
+  }
+  .p3r-about svg,
+  .p3r-about__char-wrap {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  /* ===== 1. ELEGANT CONCENTRIC ARCS (STATIC CLEAN GPU LAYER) ===== */
+  .p3r-arcs-group {
+    transform-origin: 665px -20px;
+  }
+
+  /* Thin Sonar Pulse Rings (GPU scale3d & opacity - 0% CPU repaint) */
+  .p3r-sonar-ring {
+    transform-origin: 665px -20px;
+    will-change: transform, opacity;
+    animation: p3r-sonar-pulse 8s cubic-bezier(0.1, 0.7, 0.2, 1) infinite;
+  }
+  .p3r-sonar-ring:nth-child(2) { animation-delay: 2s; }
+  .p3r-sonar-ring:nth-child(3) { animation-delay: 4s; }
+  .p3r-sonar-ring:nth-child(4) { animation-delay: 6s; }
+
+  @keyframes p3r-sonar-pulse {
+    0% {
+      transform: scale3d(0.15, 0.15, 1);
+      stroke-width: 4px;
+      stroke: #5ce8ff;
+      opacity: 0.9;
+    }
+    50% {
+      stroke: #00b4d8;
+      opacity: 0.55;
+    }
+    100% {
+      transform: scale3d(1.85, 1.85, 1);
+      stroke-width: 1px;
+      stroke: #007799;
+      opacity: 0;
+    }
+  }
+
+  /* ===== 3. KARAKTER MAKOTO YUKI (FLOATING HALUS & ANCHORED) ===== */
+  .p3r-about__char-wrap {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 3.5%;
+    bottom: -3.5%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 5;
+    will-change: transform;
+    animation: p3r-subtle-float 4.8s ease-in-out infinite alternate;
+  }
+
+  @keyframes p3r-subtle-float {
+    0% {
+      transform: translate3d(0, 0, 0);
+    }
+    100% {
+      transform: translate3d(0, -4px, 0);
+    }
+  }
+
+  .p3r-about__char {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: right bottom;
+    pointer-events: none;
+    user-select: none;
+  }
+  /* Responsive Tablet & Mobile (Karakter Utuh Tanpa Terpotong) */
+  @media (max-width: 1024px) {
+    .p3r-about__char-wrap {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      width: 100%;
+      height: 100%;
+      top: auto;
+      pointer-events: none;
+    }
+    .p3r-about__char {
+      position: absolute;
+      right: -4%;
+      bottom: 0;
+      height: 68vh;
+      max-height: 700px;
+      width: auto;
+      max-width: none;
+      object-fit: contain;
+      transform: none;
+    }
+  }
+  @media (max-width: 767px) {
+    .p3r-about__char {
+      right: -8%;
+      bottom: -2%;
+      height: 52vh;
+      max-height: 460px;
+      opacity: 0.75;
+    }
+  }
+
+  /* ===== 4. FLOATING TRIANGLE SHARDS (GPU Accelerated) ===== */
+  .p3r-shard {
+    transform-box: fill-box;
+    transform-origin: center center;
+    will-change: transform, opacity;
+    animation: p3r-shard-drift 3.8s ease-in-out infinite;
+  }
+
+  @keyframes p3r-shard-drift {
+    0%, 100% {
+      transform: translate3d(0, 0, 0) rotate(0deg);
+      opacity: 0.75;
+    }
+    50% {
+      transform: translate3d(var(--tx, -10px), var(--ty, -22px), 0) rotate(var(--rot, 20deg));
+      opacity: 0.35;
+    }
+  }
+
+  /* ===== 5. MP3 PLAYER / EVOKER HOLSTER NEON GLOW ===== */
+  .p3r-mp3-glow {
+    transform-origin: 535px 415px;
+    will-change: opacity;
+    animation: p3r-neon-pulse 2s ease-in-out infinite alternate;
+  }
+  @keyframes p3r-neon-pulse {
+    0% {
+      opacity: 0.65;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  /* ===== 6. INTERACTIVE CLICK RIPPLES ===== */
+  .p3r-click-layer {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 20;
+  }
+
+  .p3r-click-circle {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    border: 2px solid #5ce8ff;
+    box-shadow: 0 0 16px rgba(0, 229, 255, 0.85), inset 0 0 12px rgba(0, 229, 255, 0.45);
+    transform: translate3d(-50%, -50%, 0);
+    animation: p3r-click-expand 0.95s cubic-bezier(0.12, 0.8, 0.25, 1) forwards;
+    will-change: transform, opacity;
+  }
+
+  .p3r-click-circle::before {
+    content: "";
+    position: absolute;
+    inset: 12px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(160, 240, 255, 0.75);
+  }
+
+  @keyframes p3r-click-expand {
+    0% {
+      width: 30px;
+      height: 30px;
+      opacity: 0.95;
+      border-width: 3.5px;
+    }
+    60% {
+      opacity: 0.65;
+    }
+    100% {
+      width: 360px;
+      height: 360px;
+      opacity: 0;
+      border-width: 1px;
+    }
+  }
+
+
+/* --- contact-bg.html --- */
+
+  
+  
+
+  /* ===== P3R FULLSCREEN CONTAINER ===== */
+  .p3r {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background: #060b16;
+    isolation: isolate;
+    contain: strict;
+  }
+  .p3r svg,
+  .p3r__char-wrap {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  /* ===== KARAKTER MAKOTO YUKI (FLOATING HALUS & SUBTLE) ===== */
+  /* ===== KARAKTER MAKOTO YUKI (ANCHORED DI BAWAH & FLOATING HALUS) ===== */
+  .p3r__char-wrap {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 4%;
+    bottom: -4%;
+    height: 100%;
+    pointer-events: none;
+    will-change: transform;
+    animation: p3r-subtle-float 4.8s ease-in-out infinite alternate;
+  }
+
+  @keyframes p3r-subtle-float {
+    0% {
+      transform: translate3d(0, 0, 0);
+    }
+    100% {
+      transform: translate3d(0, -4px, 0);
+    }
+  }
+
+  .p3r__char {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: right bottom;
+    pointer-events: none;
+    user-select: none;
+  }
+  /* Responsive Tablet & Mobile (Karakter Utuh Tanpa Terpotong) */
+  @media (max-width: 1024px) {
+    .p3r__char-wrap {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+    .p3r__char {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      height: 72vh;
+      max-height: 750px;
+      width: auto;
+      max-width: none;
+      object-fit: contain;
+      transform: translateX(-4%);
+    }
+  }
+  @media (max-width: 767px) {
+    .p3r__char {
+      right: 0;
+      bottom: -10px;
+      height: 54vh;
+      max-height: 490px;
+      transform: translateX(0);
+      opacity: 0.7;
+    }
+  }
+  /* ===== 1. Headphone Soundwave Ripple Rings (Beranimasi) ===== */
+  .p3r__ripples {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 5;
+  }
+  .p3r-ring {
+    transform-origin: 714px 308px;
+    animation: p3r-soundwave 2.4s cubic-bezier(0.1, 0.7, 0.1, 1) infinite;
+  }
+  .p3r-ring:nth-child(2) { animation-delay: 0.32s; }
+  .p3r-ring:nth-child(3) { animation-delay: 0.65s; }
+  .p3r-ring:nth-child(4) { animation-delay: 1.2s; }
+  .p3r-ring:nth-child(5) { animation-delay: 1.55s; }
+
+  @keyframes p3r-soundwave {
+    0% {
+      r: 16px;
+      stroke-width: 3.5px;
+      stroke: #00e5ff;
+      opacity: 0.95;
+    }
+    50% {
+      stroke: #00aaff;
+      opacity: 0.6;
+    }
+    100% {
+      r: 72px;
+      stroke-width: 1px;
+      stroke: #0066ff;
+      opacity: 0;
+    }
+  }
+
+  /* ===== 2. Audio Visualizer Equalizer Waveform (Beranimasi) ===== */
+  .p3r-wave-bar {
+    transform-box: fill-box;
+    transform-origin: center center;
+    animation: p3r-eq 1.2s ease-in-out infinite alternate;
+  }
+
+  @keyframes p3r-eq {
+    0% {
+      transform: scaleY(0.6);
+      opacity: 0.7;
+    }
+    50% {
+      transform: scaleY(var(--scale, 2.0));
+      opacity: 1;
+    }
+    100% {
+      transform: scaleY(0.4);
+      opacity: 0.55;
+    }
+  }
+
+  /* ===== 3. Floating Triangle Shards (Beranimasi) ===== */
+  .p3r-shard {
+    transform-box: fill-box;
+    transform-origin: center center;
+    animation: p3r-float 3.6s ease-in-out infinite;
+  }
+
+  @keyframes p3r-float {
+    0%, 100% {
+      transform: translate(0, 0) rotate(0deg);
+      opacity: 0.75;
+    }
+    50% {
+      transform: translate(var(--tx, -10px), var(--ty, -22px)) rotate(var(--rot, 20deg));
+      opacity: 0.3;
+    }
+  }
+
+  /* ===== 4. Cyan Neon Glow Pulse under RELOAD (Beranimasi) ===== */
+  .p3r-glow-pulse {
+    animation: p3r-glow 1.8s ease-in-out infinite alternate;
+  }
+
+  @keyframes p3r-glow {
+    0% {
+      opacity: 0.5;
+    }
+    100% {
+      opacity: 0.9;
+    }
+  }
+
+  /* ===== 5. Hexagon Twinkling (Beranimasi) ===== */
+  .p3r-hex-node {
+    animation: p3r-hex-twinkle 3s ease-in-out infinite;
+  }
+
+  @keyframes p3r-hex-twinkle {
+    0%, 100% {
+      fill-opacity: var(--base-op, 0.2);
+    }
+    50% {
+      fill-opacity: var(--peak-op, 0.75);
+      fill: #2284f5;
+    }
+  }
+
+  .p3r text { font-family: "Orbitron", "Arial Black", sans-serif; }
+
