@@ -559,7 +559,8 @@ function openPage(pageId, clickEvent) {
   activePage = pageEl;
   playSound("nav");
 
-  let origin = { x: window.innerWidth * 0.58, y: window.innerHeight * 0.5 };
+  const isMobile = window.innerWidth <= 768;
+  let origin = { x: window.innerWidth * 0.5, y: window.innerHeight * 0.5 };
   if (clickEvent && clickEvent.clientX > 0) {
     origin = { x: clickEvent.clientX, y: clickEvent.clientY };
   }
@@ -568,25 +569,33 @@ function openPage(pageId, clickEvent) {
   pageEl.classList.remove("active");
   pageEl.classList.add("circle-transitioning");
   pageEl.setAttribute("aria-hidden", "false");
-  const videoEl = pageEl.querySelector("video");
-  if (videoEl) {
-    videoEl.currentTime = 0;
-    videoEl.play().catch(() => { });
+
+  let keyframes;
+  if (isMobile) {
+    // Di HP: gunakan circle() GPU primitive murni (menghindari software rasterizer polygon yang glitch)
+    keyframes = [
+      { clipPath: `circle(0px at ${origin.x.toFixed(1)}px ${origin.y.toFixed(1)}px)` },
+      { clipPath: `circle(${targetRadius}px at ${origin.x.toFixed(1)}px ${origin.y.toFixed(1)}px)` },
+    ];
+  } else {
+    // Di Desktop: wavy polygon Persona 3 otentik tanpa jitter lompatan koordinat
+    keyframes = [
+      { clipPath: generateWavyPolygon(origin.x, origin.y, 0, 48, 0.0) },
+      { clipPath: generateWavyPolygon(origin.x, origin.y, targetRadius * 0.45, 48, 1.2), offset: 0.38 },
+      { clipPath: generateWavyPolygon(origin.x, origin.y, targetRadius, 48, 2.4) },
+    ];
   }
-  const anim = pageEl.animate(
-    [
-      { clipPath: generateWavyPolygon(origin.x, origin.y, 0, 72, 0.0) },
-      { clipPath: generateWavyPolygon(origin.x + 22, origin.y - 12, targetRadius * 0.45, 72, 1.2), offset: 0.38 },
-      { clipPath: generateWavyPolygon(origin.x, origin.y, targetRadius, 72, 3.4) },
-    ],
-    { duration: 520, easing: "cubic-bezier(0.2, 1, 0.35, 1)", fill: "forwards" }
-  );
+
+  const anim = pageEl.animate(keyframes, {
+    duration: isMobile ? 360 : 500,
+    easing: "cubic-bezier(0.16, 1, 0.3, 1)",
+    fill: "forwards"
+  });
 
   anim.onfinish = () => {
+    pageEl.style.clipPath = "none";
     pageEl.classList.remove("circle-transitioning");
     pageEl.classList.add("active");
-    pageEl.style.clipPath = "";
-    anim.cancel();
     isTransitioning = false;
   };
 }
@@ -597,28 +606,39 @@ function closeCurrentPage() {
   const pageEl = activePage;
   playSound("close");
 
-  const origin = { x: window.innerWidth - 120, y: window.innerHeight - 55 };
+  const isMobile = window.innerWidth <= 768;
+  const origin = isMobile
+    ? { x: window.innerWidth - 45, y: window.innerHeight - 35 }
+    : { x: window.innerWidth - 120, y: window.innerHeight - 55 };
   const targetRadius = calculateTargetRadius(origin);
 
   pageEl.classList.remove("active");
   pageEl.classList.add("circle-transitioning");
 
-  const anim = pageEl.animate(
-    [
-      { clipPath: generateWavyPolygon(origin.x, origin.y, targetRadius, 72, 0.0) },
-      { clipPath: generateWavyPolygon(origin.x - 20, origin.y - 12, targetRadius * 0.42, 72, 2.0), offset: 0.65 },
-      { clipPath: generateWavyPolygon(origin.x, origin.y, 0, 72, 3.0) },
-    ],
-    { duration: 460, easing: "cubic-bezier(0.16, 1, 0.3, 1)", fill: "forwards" }
-  );
+  let keyframes;
+  if (isMobile) {
+    keyframes = [
+      { clipPath: `circle(${targetRadius}px at ${origin.x.toFixed(1)}px ${origin.y.toFixed(1)}px)` },
+      { clipPath: `circle(0px at ${origin.x.toFixed(1)}px ${origin.y.toFixed(1)}px)` },
+    ];
+  } else {
+    keyframes = [
+      { clipPath: generateWavyPolygon(origin.x, origin.y, targetRadius, 48, 0.0) },
+      { clipPath: generateWavyPolygon(origin.x, origin.y, targetRadius * 0.42, 48, 1.4), offset: 0.65 },
+      { clipPath: generateWavyPolygon(origin.x, origin.y, 0, 48, 2.8) },
+    ];
+  }
+
+  const anim = pageEl.animate(keyframes, {
+    duration: isMobile ? 300 : 440,
+    easing: "cubic-bezier(0.16, 1, 0.3, 1)",
+    fill: "forwards"
+  });
 
   anim.onfinish = () => {
+    pageEl.style.clipPath = "none";
     pageEl.classList.remove("circle-transitioning", "active");
-    pageEl.style.clipPath = "";
     pageEl.setAttribute("aria-hidden", "true");
-    const videoEl = pageEl.querySelector("video");
-    if (videoEl) videoEl.pause();
-    anim.cancel();
     isTransitioning = false;
     activePage = null;
   };

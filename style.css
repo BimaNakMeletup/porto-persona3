@@ -915,6 +915,9 @@ button {
   opacity: 1 !important;
   pointer-events: none !important;
   will-change: clip-path;
+  transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 
 .sub-video-container {
@@ -937,10 +940,6 @@ button {
   display: block;
 }
 
-/* Nonaktifkan render iframe saat sub-halaman tidak aktif agar 0% CPU/GPU overhead */
-.sub-page:not(.active):not(.circle-transitioning) .sub-bg-frame {
-  display: none !important;
-}
 
 .sub-bg-video {
   position: fixed;
